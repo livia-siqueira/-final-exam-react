@@ -7,17 +7,15 @@ import {
 import { FiArrowRight, FiArrowLeft } from "react-icons/fi/";
 import { Input } from "../../UI/Input/styles";
 
-function FormRegister() {
+function FormResetPassword() {
   return (
     <>
       <div>
-        <TitleForm>Registration</TitleForm>
+        <TitleForm>Reset Password</TitleForm>
         <Container>
-          <Input type="text" placeholder="Nome" />
           <Input type="Email" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
           <Button type="submit">
-            Register <FiArrowRight color="#B5C401" />
+            Send link <FiArrowRight color="#B5C401" />
           </Button>
         </Container>
         <ButtonSignUp>
@@ -27,4 +25,4 @@ function FormRegister() {
     </>
   );
 }
-export default FormRegister;
+export default FormResetPassword;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.form`
   width: 352px;
-  height: 337px;
+  height: 194px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   border: 0;
@@ -11,7 +11,6 @@ export const Container = styled.form`
   box-shadow: 0px 3px 25px #00000014;
   border-radius: 14px 14px 14px 14px;
 `;
-
 export const Button = styled.button`
   border: 0;
   background-color: transparent;

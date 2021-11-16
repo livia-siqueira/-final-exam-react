@@ -1,15 +1,16 @@
-import React from 'react';
-import { Home } from './components/Home/Home';
-import { Registration } from './components/Registration/Registration';
-import './stylesGlobal/global';
-import { GlobalStyle } from './stylesGlobal/global';
+import { PageBet } from "@components/PageGame/PageBet";
+import React from "react";
+import { Home } from "./pages/Home";
+import { RoutesProject } from "./routes";
+import "./stylesGlobal/global";
+import { GlobalStyle } from "./stylesGlobal/global";
 
 function App() {
   return (
     <>
-    <GlobalStyle/>
-    {/*<Home/>*/}
-    <Registration/>
+        <RoutesProject/>
+        <GlobalStyle />
+        <PageBet/>
     </>
   );
 }
