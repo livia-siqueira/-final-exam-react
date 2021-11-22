@@ -1,5 +1,7 @@
 import { TitlePrincipal } from "./styles";
+import { Connect } from "react-redux";
 export function MainText() {
+
   return (
     <>
       <TitlePrincipal>

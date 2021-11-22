@@ -1,13 +1,5 @@
-import {FooterMain} from './index';
+import {FooterMain} from './styles';
 
-export function FooterPages() {
-  return (
-    <FooterMain>
-      <p>Copyright 2020 Luby Software</p>
-    </FooterMain>
-  );
-}
 
-export function PageFooter() {
 
-}
+export const FooterPage = () => <FooterMain>Copyright 2020 Luby Software</FooterMain>

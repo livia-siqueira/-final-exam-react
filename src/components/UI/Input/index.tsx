@@ -1,12 +1,15 @@
+import React from "react";
 
 
 interface propsInput{
     type: string,
     placeholder: string
+    onChange() : void
+    value: string
 }
 
-export function Input(props: propsInput) {
+export const Input = ((props: propsInput) => {
     return(
-        <input type={props.type} placeholder={props.placeholder}/>
+        <input type={props.type} value={props.value} placeholder={props.placeholder} onChange={props.onChange}/>
     );
-}
+})

@@ -1,24 +1,37 @@
-
+import { Button, Header as HeaderPage } from "./styles";
+import {FiArrowRight} from 'react-icons/fi'
+import { dispatch } from "react-hot-toast/dist/core/store";
 
 export function Header() {
-    return (
-    <header id="header">
-    <div id="header-left">
-        <div id="nameCompany">
+
+
+
+
+  function handlerLogout(){
+    
+  }
+
+  
+  return (
+    <>
+      <HeaderPage>
+        <div className="header-left">
+          <div className="nameCompany">
             <h1>TLG</h1>
-            <hr/>
-        </div>
-        <div id="Home">
+            <hr />
+          </div>
+          <div className="Home">
             <h2>Home</h2>
+          </div>
         </div>
-    </div>
-    <div id="header-rigth">
-        <h2>Account</h2>
-        <div id="logout">
-            <h2>Log out</h2>
-            <span><img src="./assets/arrowRigth.svg"/></span>
+        <div className="header-rigth">
+          <Button>Account</Button>
+          <div className="logout">
+            <Button onClick={handlerLogout}>Log out <FiArrowRight/></Button>
+          </div>
         </div>
-    </div>
-</header>
-);
+      </HeaderPage>
+      <hr />
+    </>
+  );
 }

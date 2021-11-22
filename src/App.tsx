@@ -1,16 +1,22 @@
-import { PageBet } from "@components/PageGame/PageBet";
 import React from "react";
-import { Home } from "./pages/Home";
 import { RoutesProject } from "./routes";
 import "./stylesGlobal/global";
 import { GlobalStyle } from "./stylesGlobal/global";
+import { Provider } from "react-redux";
+import {store} from "./store";
+import { Toaster } from "react-hot-toast";
+  
+
 
 function App() {
+
   return (
     <>
-        <RoutesProject/>
+    <Provider store={store}>
+        <RoutesProject />
         <GlobalStyle />
-        <PageBet/>
+      <Toaster position="top-left" toastOptions={{duration:3000}}/>
+    </Provider>
     </>
   );
 }
