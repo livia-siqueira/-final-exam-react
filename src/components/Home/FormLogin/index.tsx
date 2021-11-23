@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { useNavigate } from "react-router";
 import { loginUser } from "src/store/users/controlUsers/index";
+import toast from "react-hot-toast";
 
 
 export function FormLogin() {
@@ -19,20 +20,28 @@ export function FormLogin() {
   const [inputEmail, setInputEmail] = useState<string>();
   const [inputSenha, setInputSenha] = useState<string>();
   const dispatch = useDispatch();
+  const userIsLogged = useSelector((state: RootState) => state.users.isAutenthicated)
+
+ 
+ 
 
   function handlerLogin(event: FormEvent) {
     event.preventDefault();
+    
     dispatch(loginUser({email: inputEmail, password: inputSenha}));
-    navigate('/PageBet')
+
+    if(userIsLogged) {
+      navigate("/HomeUser")
+    }
+    else{
+      toast.error("Insira os dados corretamente ou cadastre-se")
+    }
   }
 
   function register(event: FormEvent) {
     event.preventDefault();
     navigate("/Registration");
   }
-
-  const users = useSelector((state: RootState) => state.users);
-  console.log(users);
 
   return (
     <>

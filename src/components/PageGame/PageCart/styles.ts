@@ -7,6 +7,8 @@ export const Container = styled.div`
   border-radius: 10px;
   opacity: 1;
   padding-left: 15px;
+  width: 310px;
+  max-height: 400px;
 `;
 
 export const Link = styled.a`
@@ -20,7 +22,13 @@ export const Link = styled.a`
 
 export const Title = styled.h1``;
 
-export const Bets = styled.div``;
+export const Bets = styled.div`
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 200px;
+  margin-top: 20px;
+  display: block;
+`;
 
 export const CartTotal = styled.span``;
 
@@ -37,7 +45,6 @@ export const InputPrice = styled.input`
 `;
 
 export const FooterCart = styled.div` 
-margin-top: 100%;
   font-variant: small-caps;
   font-size: 2rem;
 

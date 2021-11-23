@@ -4,6 +4,7 @@ import {AiOutlineShoppingCart} from 'react-icons/ai'
 interface propsBetArea {
   handleCompleteGame: () => void
   handleClearGame: () => void
+  handleAddCart: () => void
 }
 export function UserActionGame(props: propsBetArea) {
   return (
@@ -13,7 +14,7 @@ export function UserActionGame(props: propsBetArea) {
         <Button onClick={props.handleClearGame}>Clear game</Button>
       </ContainerButtonGame>
       <ContainerButtonAddCart>
-        <ButtonAddCart><AiOutlineShoppingCart size="26"/>Add to Cart</ButtonAddCart>
+        <ButtonAddCart onClick={props.handleAddCart}><AiOutlineShoppingCart size="26"/>Add to Cart</ButtonAddCart>
       </ContainerButtonAddCart>
     </Container>
   );

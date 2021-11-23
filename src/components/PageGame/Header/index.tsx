@@ -1,17 +1,8 @@
 import { Button, Header as HeaderPage } from "./styles";
 import {FiArrowRight} from 'react-icons/fi'
-import { dispatch } from "react-hot-toast/dist/core/store";
 
 export function Header() {
 
-
-
-
-  function handlerLogout(){
-    
-  }
-
-  
   return (
     <>
       <HeaderPage>
@@ -27,7 +18,7 @@ export function Header() {
         <div className="header-rigth">
           <Button>Account</Button>
           <div className="logout">
-            <Button onClick={handlerLogout}>Log out <FiArrowRight/></Button>
+            <Button>Log out <FiArrowRight/></Button>
           </div>
         </div>
       </HeaderPage>

@@ -1,22 +1,55 @@
 import { UsuarioState, Usuario } from "./types";
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import { validatePassword, validationEmail } from "src/store/general";
-import {toast} from 'react-hot-toast'
+import { toast } from "react-hot-toast";
 
 interface LoginData {
   email?: string;
   password?: string;
 }
+
+export interface Bet {
+  bet: {
+    id: string;
+    type: string;
+    color: string;
+    numbers: number[];
+    price: number;
+    date: string;
+  };
+  user: string;
+}
+
+export interface usuario {
+  name: string;
+  email: string;
+  password: string;
+  bets: Bet[];
+  id: string;
+}
+
 type Auth = {
-  users: Usuario[];
+  users: usuario[];
   isAutenthicated: boolean;
-  id_userAuthenticated: Usuario | null;
+  userAuthenticated: usuario | null;
+};
+
+type UpdateUser = Omit<usuario, "name" | "password" | "id">;
+
+type AddToCartData = {
+  bet: {
+    type: string;
+    color: string;
+    numbers: number[];
+    price: number;
+  },
+  user: string;
 };
 
 const initialState: Auth = {
   users: [],
   isAutenthicated: false,
-  id_userAuthenticated: null,
+  userAuthenticated: null,
 };
 
 const userSlice = createSlice({
@@ -36,7 +69,7 @@ const userSlice = createSlice({
             email,
             password,
             id: email,
-            bets: []
+            bets: [],
           };
           state.users.push(newUser);
         }
@@ -51,20 +84,36 @@ const userSlice = createSlice({
           );
           if (existentUser) {
             state.isAutenthicated = true;
-            state.id_userAuthenticated = existentUser;
-            toast.success(`Olá, ${existentUser.name}! Boa sorte em suas apostas 🤞`)
-          }else{
-             toast.error('Credenciais inválidas')
-             return;
+            state.userAuthenticated = existentUser;
+            toast.success(
+              `Olá, ${existentUser.name}! Boa sorte em suas apostas 🤞`
+            );
+          } else {
+            toast.error("Credenciais inválidas");
+            return;
           }
         }
       }
     },
-    logoutUser(state, {payload}: PayloadAction<LoginData>){
+    addBetInUser(state, { payload }: PayloadAction<AddToCartData>) {
+      const newBet: Bet = {
+        bet: {
+          ...payload.bet,
+          id: "1",
+          date: new Date().toString(),
+        },
+        user: payload.user,
+      };
 
-    }
+      state.users.map((user) => {
+        if (user.email === payload.user) {
+          return user.bets.push(newBet)
+        }
+      });
+      console.log(payload)
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { addUser, loginUser } = userSlice.actions;
+export const { addUser, loginUser, addBetInUser } = userSlice.actions;

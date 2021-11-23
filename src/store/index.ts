@@ -4,6 +4,7 @@ import {UsuarioState} from './users/controlUsers/types'
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from './users/controlUsers/index'
 import {gamesReducer} from "./games";
+import cartReducer from "./cartGames";
 
 
 export interface ApplicationState {
@@ -13,7 +14,8 @@ export interface ApplicationState {
 export const store = configureStore({
     reducer: {
         users: userSlice,
-        games: gamesReducer
+        games: gamesReducer,
+        cart: cartReducer
     }
 })
 

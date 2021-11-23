@@ -1,33 +1,16 @@
-import {createSlice} from '@reduxjs/toolkit'
-import { Usuario } from '../users/controlUsers/types'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { dispatch } from "react-hot-toast/dist/core/store";
+import { usuario } from "../users/controlUsers";
 
 
-interface Bet {
-    numbers: [],
-    price: 0
-}
-
-interface InitialState {
-    bets: Bet[],
-    user: Usuario
-}
+const cart = createSlice({
+  name: "@bets",
+  initialState: 0,
+  reducers: {
+   
+  },
+});
 
 
-const initialState = {
-    bets: [],
-    user: ''
+export default cart.reducer;
 
-}
-
-
-
-export const betsReducer = createSlice({
-    name: 'bets',
-    initialState,
-    reducers: {
-        addBetInCart(state, action){
-            
-        }
-    }
-
-})

@@ -1,6 +1,5 @@
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { Header } from "../Header";
-import { ButtonsBet } from "@components/PageGame/ButtonsBet/index";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { AppDispatch } from "src/store";
@@ -10,18 +9,21 @@ import { Button } from "../ButtonsGame/ButtonsGame";
 import { Container, Main, Title } from "./styles";
 import { UserActionGame } from "../UserActionGame";
 import { PageCart } from "../PageCart/index";
-import toast from "react-hot-toast";
 import { BetArea } from "./BetArea";
+import toast from "react-hot-toast";
+import { addBetInUser } from "src/store/users/controlUsers/index";
 
-function PageBet() {
+export default function PageBet() {
   const dispatch: AppDispatch = useDispatch();
   const [numberBet, setNumbersBet] = useState<number[]>([]);
-  let btClick = false;
 
   useEffect(() => {
     dispatch(fetchGamesData());
   }, [dispatch]);
 
+  const userLogged = useSelector(
+    (state: RootState) => state.users.userAuthenticated
+  );
   const games = useSelector((state: RootState) => state.games);
   const gameActive = games.isGameAtivate;
 
@@ -33,27 +35,25 @@ function PageBet() {
     length: gameActual?.range ? gameActual?.range : 0,
   });
 
-  const numberGame : number[]= ArrayMaxNumber.map((number, index) => (
-    number = index + 1
-  ))
+  const numberGame: number[] = ArrayMaxNumber.map((_, index) => index + 1);
 
   function changeGameActual(type: string) {
     dispatch(gameSelected(type));
   }
-function handleClearGame(){
-  setNumbersBet([])
-}
+
+  function handleClearGame() {
+    setNumbersBet([]);
+  }
+
   const handleCompleteGame = useCallback(() => {
     setNumbersBet((number) => {
       const getNumbers = [...number];
-      console.log(gameActual)
       const maxNumbersSorted = gameActual?.["max-number"]
         ? gameActual?.["max-number"]
         : 0;
       const qtdNumberSorted = gameActual?.range ? gameActual?.range : 0;
-      console.log(maxNumbersSorted)
       if (maxNumbersSorted !== 0) {
-        while (getNumbers.length <= maxNumbersSorted) {
+        while (getNumbers.length < maxNumbersSorted) {
           const numberGame = Math.floor(Math.random() * qtdNumberSorted);
           if (!getNumbers.includes(numberGame)) {
             getNumbers.push(numberGame);
@@ -64,7 +64,45 @@ function handleClearGame(){
     });
   }, [gameActual]);
 
-  function handlerEliminateNumberBet() {}
+  const handleNoSelectNumber = useCallback((number: number) => {
+    setNumbersBet((numbers) => {
+      return numbers.filter((numberSelect) => numberSelect !== number);
+    });
+  }, []);
+
+  const handleSelectNumber = useCallback(
+    (number: number) => {
+      setNumbersBet((numbers) => {
+        const existQtdNumber = numbers.length;
+        const maxNumber = gameActual ? gameActual["max-number"] : 0;
+        if (existQtdNumber >= maxNumber) {
+          return numbers;
+        }
+        return [...numbers, number];
+      });
+    },
+    [gameActual]
+  );
+
+  const handleAddCart = useCallback(() => {
+    const numbersInCar = numberBet.length;
+    const maxNumberGame = gameActual ? gameActual["max-number"] : 0;
+    const game = maxNumberGame - numbersInCar;
+    if (game !== 0)
+      return toast.error(
+        `Hi, select the right amount of numbers\nPara ${gameActual?.type} selecione ${gameActual?.range}\nFaltam ${game} números 😉`
+      );
+    const newBet = {
+      bet: {
+        numbers: numberBet,
+        type: gameActual ? gameActual.type : "erro",
+        price: gameActual ? gameActual.price : 0,
+        color: gameActual ? gameActual.color : "erro",
+      },
+      user: userLogged ? userLogged.email : "erro",
+    };
+    dispatch(addBetInUser(newBet));
+  }, [dispatch, handleClearGame, gameActual, numberBet]);
 
   return (
     <>
@@ -85,17 +123,22 @@ function handleClearGame(){
               {item.type}
             </Button>
           ))}
-          <BetArea arrayNumbersBet={numberGame}
+          <BetArea
+            arrayNumbersBet={numberGame}
             numberBet={numberBet}
-            handleSelectedNumber={handleCompleteGame}
-            handleNoSelectedNumber={handlerEliminateNumberBet}
-            gameActual={gameActual ? gameActual : null}/>
-          <UserActionGame handleCompleteGame={handleCompleteGame} handleClearGame={handleClearGame} />
+            handleCompleteGame={handleCompleteGame}
+            handleSelectNumber={handleSelectNumber}
+            handleNoSelectedNumber={handleNoSelectNumber}
+            gameActual={gameActual ? gameActual : null}
+          />
+          <UserActionGame
+            handleCompleteGame={handleCompleteGame}
+            handleClearGame={handleClearGame}
+            handleAddCart={handleAddCart}
+          />
         </Main>
         <PageCart />
       </Container>
     </>
   );
 }
-
-export default PageBet;
