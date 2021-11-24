@@ -19,23 +19,16 @@ export function FormLogin() {
   const navigate = useNavigate();
   const [inputEmail, setInputEmail] = useState<string>();
   const [inputSenha, setInputSenha] = useState<string>();
-  const dispatch = useDispatch();
-  const userIsLogged = useSelector((state: RootState) => state.users.isAutenthicated)
-
- 
- 
+  const dispatch = useDispatch(); 
+  const userLogged = useSelector((state: RootState) => state.users.isAutenthicated)
 
   function handlerLogin(event: FormEvent) {
     event.preventDefault();
-    
     dispatch(loginUser({email: inputEmail, password: inputSenha}));
-
-    if(userIsLogged) {
-      navigate("/HomeUser")
+    if(userLogged) {
+      navigate('/HomeUser')
     }
-    else{
-      toast.error("Insira os dados corretamente ou cadastre-se")
-    }
+    
   }
 
   function register(event: FormEvent) {

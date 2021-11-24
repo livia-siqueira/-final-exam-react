@@ -1,7 +1,29 @@
 import { Button, Header as HeaderPage } from "./styles";
 import {FiArrowRight} from 'react-icons/fi'
+import { AppDispatch } from "src/store";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "src/store/users/controlUsers";
+import { useNavigate } from "react-router";
 
-export function Header() {
+interface propsHeader {
+  type: string;
+}
+
+export function Header({type}: propsHeader) {
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+
+
+  const handleLogout = () => {
+    dispatch(logoutUser())
+    navigate("/")
+  }
+  const handleHome = () =>{
+    navigate("/HomeUser")
+  }
+  const handleRegister = () => {
+    navigate("/Registration")
+  }
 
   return (
     <>
@@ -12,15 +34,19 @@ export function Header() {
             <hr />
           </div>
           <div className="Home">
-            <h2>Home</h2>
+           {type === "Home" ?  <button onClick={handleHome}>Home</button> : ''}
           </div>
         </div>
-        <div className="header-rigth">
+       { type !== "Nulo" ? <div className="header-rigth">
           <Button>Account</Button>
           <div className="logout">
-            <Button>Log out <FiArrowRight/></Button>
+            <Button onClick={handleLogout}>Log out <FiArrowRight/></Button>
           </div>
+        </div> : 
+          <div className="logout">
+          <Button onClick={handleRegister}>Sign Up <FiArrowRight/></Button>
         </div>
+        }
       </HeaderPage>
       <hr />
     </>

@@ -1,14 +1,15 @@
-import { Container } from "./styles";
 import { MainText } from "@components/Home/MainText/index";
 import FormResetPassword from "@components/ResetPassword/FormResetPassword";
+import { FooterPage } from "@components/FooterPages";
 
 export function ResetPassword() {
     return (
-        <div>
-            <Container>
+        <>
+            
             <MainText/>
             <FormResetPassword/>
-            </Container>
-        </div>
+           
+            <FooterPage/>
+        </>
     );
 }

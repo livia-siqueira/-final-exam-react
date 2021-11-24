@@ -12,6 +12,7 @@ import { PageCart } from "../PageCart/index";
 import { BetArea } from "./BetArea";
 import toast from "react-hot-toast";
 import { addBetInUser } from "src/store/users/controlUsers/index";
+import { ButtonsGame } from "../ButtonsGame";
 
 export default function PageBet() {
   const dispatch: AppDispatch = useDispatch();
@@ -24,6 +25,7 @@ export default function PageBet() {
   const userLogged = useSelector(
     (state: RootState) => state.users.userAuthenticated
   );
+
   const games = useSelector((state: RootState) => state.games);
   const gameActive = games.isGameAtivate;
 
@@ -37,8 +39,9 @@ export default function PageBet() {
 
   const numberGame: number[] = ArrayMaxNumber.map((_, index) => index + 1);
 
-  function changeGameActual(type: string) {
+ const  changeGameActual = (type: string) => {
     dispatch(gameSelected(type));
+    handleClearGame();
   }
 
   function handleClearGame() {
@@ -78,6 +81,9 @@ export default function PageBet() {
         if (existQtdNumber >= maxNumber) {
           return numbers;
         }
+        else{
+          toast.error('Já foram selecionados números suficientes')
+        }
         return [...numbers, number];
       });
     },
@@ -102,11 +108,12 @@ export default function PageBet() {
       user: userLogged ? userLogged.email : "erro",
     };
     dispatch(addBetInUser(newBet));
+    setNumbersBet([]);
   }, [dispatch, handleClearGame, gameActual, numberBet]);
 
   return (
     <>
-      <Header />
+    <Header type="Home"/>
       <Container>
         <Main>
           <Title>
@@ -114,15 +121,7 @@ export default function PageBet() {
             <span> {gameActual?.type}</span>
           </Title>
           <h3>Choose a game</h3>
-          {games.typesGame.map((item) => (
-            <Button
-              key={item.id}
-              color={item.color}
-              onClick={changeGameActual.bind(null, item.type)}
-            >
-              {item.type}
-            </Button>
-          ))}
+         <ButtonsGame select={changeGameActual}/>
           <BetArea
             arrayNumbersBet={numberGame}
             numberBet={numberBet}
@@ -137,7 +136,7 @@ export default function PageBet() {
             handleAddCart={handleAddCart}
           />
         </Main>
-        <PageCart />
+        <PageCart bets={userLogged ? userLogged.bets : []} />
       </Container>
     </>
   );

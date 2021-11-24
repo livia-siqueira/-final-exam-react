@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const TitlePrincipal = styled.h2`
-    font-size: 50px;
+    font-size: 30px;
     color: #707070;
     text-align: center;
     font-style: italic;

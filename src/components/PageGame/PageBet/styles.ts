@@ -1,12 +1,19 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 70%;
-    margin: 80px auto;
+    width: 1000px;
+    margin: 20px auto;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 80px;
     color: #707070;
+
+    max-height: 100px;
+
+    @media(max-height: 90px ){
+        width: 1400px;
+    }
+
 
 `
 

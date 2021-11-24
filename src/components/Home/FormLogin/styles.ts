@@ -4,7 +4,7 @@ export const Container = styled.form`
   width: 352px;
   height: 337px;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   border: 0;
   background-color: white;
   padding: 14px;

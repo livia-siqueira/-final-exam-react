@@ -31,14 +31,15 @@ export function FormRegister() {
     if(inputName && inputPassword && inputEmail){
       dispatch(addUser({name: inputName, email: inputEmail, password: inputPassword}))
       navigate("/")
+      
     }
     else {
       toast.error("Preencha todos os campos para se cadastrar")
     }
   }
 
-  const a = useSelector((state: RootState) => state.users)
-  console.log(a)
+  
+  
   return (
     <>
       <div>

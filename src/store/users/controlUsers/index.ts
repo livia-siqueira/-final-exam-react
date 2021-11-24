@@ -52,6 +52,11 @@ const initialState: Auth = {
   userAuthenticated: null,
 };
 
+interface propsRemoveBet {
+  user?: string,
+  id: string
+}
+
 const userSlice = createSlice({
   name: "@users",
   initialState: initialState,
@@ -74,6 +79,7 @@ const userSlice = createSlice({
           state.users.push(newUser);
         }
       }
+      return state;
     },
     loginUser(state, { payload }: PayloadAction<LoginData>) {
       const { email, password } = payload;
@@ -96,24 +102,63 @@ const userSlice = createSlice({
       }
     },
     addBetInUser(state, { payload }: PayloadAction<AddToCartData>) {
+      const idBet = Math.floor(Math.random() * 1000);
       const newBet: Bet = {
         bet: {
           ...payload.bet,
-          id: "1",
+          id: `${idBet}`,
           date: new Date().toString(),
         },
-        user: payload.user,
+        user: payload.user, 
       };
 
-      state.users.map((user) => {
+     state.users.map((user) => {
         if (user.email === payload.user) {
-          return user.bets.push(newBet)
+           user.bets.push(newBet)
+           if(state.userAuthenticated?.bets){
+             state.userAuthenticated.bets = user.bets;
+           }
         }
       });
-      console.log(payload)
+      return state;
     },
+    removeBet(state, {payload} : PayloadAction<propsRemoveBet>){
+      const user = state.users.find((user) => {
+        return user.email === payload.user
+      })
+      if(user){
+
+        const newBets = user.bets.filter((bet) => {
+          return bet.bet.id !== payload.id;
+        });
+
+        if(state.userAuthenticated?.bets){
+          state.userAuthenticated.bets = newBets;
+          state.users.map((user) => {
+            if(user.email === payload.user){
+              user.bets = newBets
+            }
+          })
+      }
+     
+      
+      }
+    },
+    addBetsInCart(state, {payload} : PayloadAction<usuario>){
+      if(!state.userAuthenticated) return;
+      state.userAuthenticated.bets = [];
+      state.users.map((user) => {
+        if(user.id === payload.id){
+          user.bets = [];
+        }
+      })
+    },
+    logoutUser(state, {payload} : PayloadAction){
+      state.userAuthenticated = null;
+      state.isAutenthicated = false;
+    }
   },
 });
 
 export default userSlice.reducer;
-export const { addUser, loginUser, addBetInUser } = userSlice.actions;
+export const { addUser, loginUser, addBetInUser, removeBet, addBetsInCart, logoutUser } = userSlice.actions;
