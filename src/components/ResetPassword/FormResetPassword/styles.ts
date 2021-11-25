@@ -24,6 +24,21 @@ export const Button = styled.button`
   align-items: center;
 `;
 
+export const ButtonBack = styled.button` 
+border: 0;
+  background-color: transparent;
+  font-size: 30px;
+  color: #868686;
+  font-weight: bold;
+  font-style: italic;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+`
+
 export const SpanForgetPassword = styled.span`
   height: 20px;
   margin-top: 20px;

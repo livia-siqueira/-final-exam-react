@@ -13,11 +13,11 @@ export const AreaFilter = styled.div`
 
 export const Title = styled.h2`
   text-align: center;
-  font: italic normal bold 24px/85px Helvetica Neue;
   letter-spacing: 0px;
   color: #707070;
   text-transform: uppercase;
   opacity: 1;
+  font-size: 1.4rem;
 `;
 
 export const Bets = styled.ul`
@@ -41,7 +41,7 @@ export const Bets = styled.ul`
 export const NewBet = styled.button`
   text-align: center;
   letter-spacing: 0px;
-  font-size: 20px;
+  font-size: 1.4rem;
   color: #b5c401;
   opacity: 1;
   background-color: transparent;

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-  width: 320px;
-  height: 290px;
+  width: 290px;
+  height: 230px;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 0.6fr;
   border: 0;
   background-color: white;
   padding: 14px;
@@ -30,18 +30,6 @@ export const Button = styled.button`
   }
 `;
 
-export const SpanForgetPassword = styled.span`
-  height: 20px;
-  margin-top: 20px;
-  button {
-    background-color: transparent;
-    border: 0;
-    margin-left: 40%;
-    font-size: 17px;
-    color: #c1c1c1;
-    font-style: italic;
-  }
-`;
 
 export const ButtonSignUp = styled.button`
   border: 0;

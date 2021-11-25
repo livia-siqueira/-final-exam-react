@@ -2,13 +2,23 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     width: 75%;
-    margin: 2px auto;
+    margin: 20px auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     color: #707070;
     overflow: hidden;
     padding-bottom: 20px;
+
+    @media(max-width: 1226px){
+        width: 90%;
+    }
+
+    @media(max-width: 720px){
+        grid-template-columns: 1fr;
+        justify-content: center;
+        gap: 0rem;
+    }
 
 
 `

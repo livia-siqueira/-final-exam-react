@@ -1,6 +1,4 @@
-import { Button } from '@components/Home/FormLogin/styles';
 import {AiOutlineCloseCircle} from 'react-icons/ai'
-import { FiArrowRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router'
 import { Container, Text } from './styles'
 

@@ -10,6 +10,11 @@ export const Container = styled.div`
   padding-right: 20px;
   width: 250px;
   max-height: 380px;
+
+  @media(max-width: 720px){
+        margin-left: 8rem;
+        margin-bottom: 5rem;
+    }
 `;
 
 export const SaveCart = styled.footer`
@@ -69,6 +74,8 @@ export const CartTotal = styled.span`
   margin-bottom: 20px;
   font-size: 1.5rem;
   text-align: center;
+
+  
 `;
 
 export const InputPrice = styled.input`

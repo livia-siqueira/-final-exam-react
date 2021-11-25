@@ -19,6 +19,11 @@ body {
     padding: 0;
     width: 100%;
     overflow: hidden;
+
+
+    @media(max-width: 720px){
+        overflow-y: scroll;
+    }
 }
 
 html{

@@ -18,5 +18,9 @@ export const ContainerBet = styled.div`
 
 export const Footer = styled.footer` 
     position: fixed;
-    top: 85%;
+    top: 90%;
+
+    @media(max-width: 720px){
+        position: relative;
+    }
 `

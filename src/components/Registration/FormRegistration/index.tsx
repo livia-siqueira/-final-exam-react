@@ -28,7 +28,7 @@ export function FormRegister() {
     event.preventDefault()
     if(inputName && inputPassword && inputEmail){
       dispatch(addUser({name: inputName, email: inputEmail, password: inputPassword}))
-      
+      navigate("/");
     }
     else {
       toast.error("Fill in all fields to register 😉")

@@ -43,7 +43,7 @@ export default function HomeUser() {
         return filter;
       });
     },
-    [betsUser, dispatch]
+    [betsUser]
   );
 
   
@@ -55,7 +55,6 @@ export default function HomeUser() {
     return g ? game.type : undefined;
   }) 
   const clearFilter = () => {
-    dispatch(gameSelected(''));
     setTypes(betsUser);
   }
 

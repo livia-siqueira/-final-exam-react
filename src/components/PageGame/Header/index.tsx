@@ -21,7 +21,7 @@ export function Header({type}: propsHeader) {
     navigate("/")
   }
   const handleHome = () =>{
-    dispatch(gameSelected(''));
+    dispatch(gameSelected(null));
     navigate("/HomeUser")
   }
   const handleRegister = () => {
