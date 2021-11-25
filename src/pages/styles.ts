@@ -8,14 +8,11 @@ display: grid;
 grid-template-columns: 1fr 1fr;
 gap: 200px;
 
-`
+@media(max-width: 720px){
+    grid-template-columns: 1fr;
+  }
 
-export const ContainerBet = styled.div` 
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    width: 100%;
 `
-
 export const Footer = styled.footer` 
     position: fixed;
     top: 90%;

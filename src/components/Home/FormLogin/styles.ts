@@ -12,11 +12,13 @@ export const Container = styled.form`
   padding-right: 0;
   box-shadow: 0px 3px 25px #00000014;
   border-radius: 14px 14px 14px 14px;
+
+
 `;
 export const Button = styled.button`
   border: 0;
   background-color: transparent;
-  font-size: 35px;
+  font-size: 3rem;
   color: #b5c401;
   font-weight: bold;
   font-style: italic;

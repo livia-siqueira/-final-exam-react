@@ -1,15 +1,21 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-  width: 352px;
-  height: 194px;
+  width: 300px;
+  height: 160px;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   border: 0;
   background-color: white;
   padding: 14px;
+  padding-left: 0;
+  padding-right: 0;
   box-shadow: 0px 3px 25px #00000014;
   border-radius: 14px 14px 14px 14px;
+
+  @media(max-width: 720px){
+    margin-left: 100px;
+  }
 `;
 export const Button = styled.button`
   border: 0;
@@ -24,10 +30,10 @@ export const Button = styled.button`
   align-items: center;
 `;
 
-export const ButtonBack = styled.button` 
-border: 0;
+export const ButtonBack = styled.button`
+  border: 0;
   background-color: transparent;
-  font-size: 30px;
+  font-size: 1.6rem;
   color: #868686;
   font-weight: bold;
   font-style: italic;
@@ -35,38 +41,26 @@ border: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-
-
-`
-
-export const SpanForgetPassword = styled.span`
-  height: 20px;
-  margin-top: 20px;
-  a {
-    text-decoration: none;
-    margin-left: 50%;
-    font-size: 17px;
-    color: #c1c1c1;
-    font-style: italic;
-  }
+  margin-top: -90px;
 `;
-
 export const ButtonSignUp = styled.button`
   border: 0;
   width: 100%;
   background-color: transparent;
   font-size: 35px;
-  margin-top: 15px;
   color: #535351;
   font-weight: bold;
   font-style: italic;
   display: flex;
   justify-content: center;
   align-items: center;
+
 `;
 
 export const TitleForm = styled.h1`
+  font-size: 1.6rem;
   text-align: center;
+  margin-right: 190px;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
