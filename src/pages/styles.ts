@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 
 export const Container = styled.div`  
-width: 50%;
-margin: 0 auto;
+width: 75%;
+margin: 50px auto;
 display: grid;
-grid-template-columns: 9fr 1fr;
-gap: 190px;
-
+grid-template-columns: 1fr 1fr;
+gap: 200px;
 
 `
 
@@ -18,6 +17,6 @@ export const ContainerBet = styled.div`
 `
 
 export const Footer = styled.footer` 
-
-
+    position: fixed;
+    top: 85%;
 `

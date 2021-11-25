@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-  width: 352px;
-  height: 337px;
+  width: 320px;
+  height: 310px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   border: 0;
@@ -10,6 +10,8 @@ export const Container = styled.form`
   padding: 14px;
   box-shadow: 0px 3px 25px #00000014;
   border-radius: 14px 14px 14px 14px;
+  padding-left: 0;
+  padding-right: 0;
 `;
 
 export const Button = styled.button`
@@ -53,8 +55,16 @@ export const ButtonSignUp = styled.button`
 
 export const TitleForm = styled.h1`
   text-align: center;
-  font: italic normal bold 35px/70px Helvetica Neue;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
+  margin-bottom: 0;
 `;
+
+export const Content = styled.div` 
+display: grid;
+justify-content: center;
+align-items: center;
+
+`
+

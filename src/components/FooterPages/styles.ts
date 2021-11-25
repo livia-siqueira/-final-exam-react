@@ -7,6 +7,7 @@ export const FooterMain = styled.footer`
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
-  border-top: 1px solid #707070;
-  height: 5px;
+  border-top: 1px solid #ebebeb;
+  height: 3px;
+
 `;

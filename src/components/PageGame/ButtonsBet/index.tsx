@@ -1,5 +1,3 @@
-import { ButtonHTMLAttributes } from "react";
-import { Game } from "src/store/games/types";
 import {Button} from './styles'
 
 

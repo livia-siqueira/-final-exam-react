@@ -1,45 +1,69 @@
-import { Header } from "@components/PageGame/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "src/store";
-import { ItemBet } from "./itemBet";
-import { Title, Bets, NewBet, AreaFilter, ButtonsFilter, Msg } from "./styles";
-import { useNavigate } from "react-router";
-import { Container } from "./styles";
-import { UserActionGame } from "@components/PageGame/UserActionGame";
-import { ButtonsGame } from "@components/PageGame/ButtonsGame";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { fetchGamesData } from "src/store/games/thunks";
+import { useEffect, useMemo, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
-import { Bet } from "src/store/users/controlUsers";
-import { type } from "os";
-import { types } from "@babel/core";
-import { fill, filter } from "lodash";
+import { AppDispatch, RootState } from "src/store";
+import {
+  Title,
+  Bets,
+  NewBet,
+  AreaFilter,
+  ButtonsFilter,
+  Container,
+  ButtonNeutralFilter,
+} from "./styles";
+import { Msg } from "../../../stylesGlobal/global";
+import { ItemBet } from "./itemBet";
+import { Header } from "@components/PageGame/Header";
+import { ButtonsGame } from "@components/PageGame/ButtonsGame";
+import { fetchGamesData } from "@storeGames/thunks";
+import { Bet } from "@utils/types";
+import { gameSelected } from "@storeGames/index";
+import { useNavigate } from "react-router";
 
 export default function HomeUser() {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchGamesData());
   }, [dispatch]);
 
   const user = useSelector((state: RootState) => state.users.userAuthenticated);
+  const typesGames = useSelector((state: RootState) => state.games.typesGame)
   const cart = useSelector((state: RootState) => state.cart.cart);
-  const {typesGame} = useSelector((state: RootState)=> state.games);
-  const betsUser = cart.filter((bet) => bet.user === user?.email)
-
+  const betsUser = cart.filter((bet) => bet.user === user?.email);
   const [bets, setTypes] = useState<Bet[]>(betsUser);
- 
-  const hasFilter = false;
-  const navigate = useNavigate();
 
-  const handleFilterGame = useMemo(() => (type: string) => {
-    setTypes(betsUser)
-    setTypes((bets) => {
-      const filter = bets.filter((bet) => {
-        return bet.bet.type === type
-      })
-      return filter;
+  const handleFilterGame = useMemo(
+    () => (type: string) => {
+      setTypes(betsUser);
+      setTypes((bets) => {
+        const filter = bets.filter((bet) => {
+          return bet.bet.type === type;
+        });
+        return filter;
+      });
+    },
+    [betsUser, dispatch]
+  );
+
+  
+  const typeSelected = typesGames.filter((game) => {
+    const g = bets.find((bet) => {
+      return bet.bet.type === game.type;
     })
-  }, [bets, user])
+
+    return g ? game.type : undefined;
+  }) 
+  const clearFilter = () => {
+    dispatch(gameSelected(''));
+    setTypes(betsUser);
+  }
+
+  const changeGameActive = () => {
+    dispatch(gameSelected('Lotofácil'));
+    navigate("/NewBet")
+  }
+
   return (
     <>
       <Header type="HomeUser" />
@@ -48,9 +72,10 @@ export default function HomeUser() {
           <Title>recente games</Title>
           <ButtonsFilter>
             <span>Filters</span>
-            <ButtonsGame select={handleFilterGame} />
+            <ButtonsGame select={handleFilterGame} type={typeSelected.length > 0 ? typeSelected[0].type : undefined } />
+            <ButtonNeutralFilter onClick={clearFilter}>Limpar filtro</ButtonNeutralFilter>
           </ButtonsFilter>
-          <NewBet to="/NewBet">
+          <NewBet onClick={changeGameActive}>
             New Bet <FiArrowRight />
           </NewBet>
         </AreaFilter>
@@ -69,9 +94,10 @@ export default function HomeUser() {
                   />
                 );
               }
+              return '';
             })
           ) : (
-            <Msg>Não há apostas recentes</Msg>
+            <Msg>You don't have recent bets</Msg>
           )}
         </Bets>
       </Container>

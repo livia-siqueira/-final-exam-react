@@ -8,7 +8,13 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@components/*": [ "./src/components/*"]
+      "@components/*": [ "./src/components/*"],
+      "@storeUser/*": ["./src/store/users/controlUsers/*"],
+      "@storeCart/*": ["./src/store/cartGames/*"],
+      "@storeGames/*": ["./src/store/games/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@utils/*": ["src/utils/*"],
+      "@stylesGlobal/*": ["./src/stylesGlobal"],
     },
     "allowJs": true,
     "skipLibCheck": true,

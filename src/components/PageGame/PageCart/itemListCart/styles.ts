@@ -6,11 +6,10 @@ interface propsContainerItemList {
 
 export const Container = styled.li`
   margin-bottom: 10px;
-  width: 100%;
   display: flex;
   align-items: center;
-  margin-left: 0 ;
-
+  margin-left: 0;
+  height: 80px;
 `;
 
 export const Section = styled.section<propsContainerItemList>`
@@ -19,25 +18,44 @@ export const Section = styled.section<propsContainerItemList>`
   color: ${(props) => props.color};
   font-weight: bold;
   font-style: italic;
-  
+
+  p {
+    width: 100px;
+  }
 `;
 export const Price = styled.p`
   color: #868686;
+  font-weight: normal;
 `;
 
-export const AreaAction = styled.div``;
+export const AreaAction = styled.div`    
+  margin-right: 6px;
 
-export const Main = styled.main<propsContainerItemList>`
+`;
+
+export const Numbers = styled.span`
+  text-align: left;
+  color: var(--letters);
+  opacity: 1;
+  font-size: 15px;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 12px;
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  word-break: break-all;
+`;
+export const Main = styled.div<propsContainerItemList>`
   border-left: 5px ${(props) => props.color} solid;
-  border-radius: 5px; 
-  padding-left: 10px;
-
+  border-radius: 5px;
+  padding-left: 5px;
 `;
 
-export const Button = styled.button` 
-background-color: transparent;
-border: 0;
-padding: 0;
-margin-right: 2px;
-`
-
+export const Button = styled.button`
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  margin-right: 2px;
+`;

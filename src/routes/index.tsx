@@ -2,12 +2,11 @@ import { Home } from "../pages/Home";
 import { Registration } from "../pages/Registration";
 import { ResetPassword } from "../pages/ResetPassword";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PageBet from "@components/PageGame/PageBet/index";
-import HomeUser from "@components/Home/HomeUser";
 import { NewBet } from "../pages/NewBet";
 import { useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { PageHomeUser } from "src/pages/PageHomeUser";
+import {ChangePassword} from '../pages/PageChangePassword'
 
 export function RoutesProject() {
   const authenticated = useSelector(
@@ -19,7 +18,7 @@ export function RoutesProject() {
         <Route path="/" element={<Home />} />
         <Route
           path="/HomeUser"
-          element={<PageHomeUser isAutorization={authenticated} />}
+          element={<PageHomeUser isAutorization={authenticated ? authenticated : false} />}
         />
         <Route
           path="/NewBet"
@@ -33,6 +32,7 @@ export function RoutesProject() {
           path="/ResetPassword"
           element={<ResetPassword />}
         />
+        <Route path="/ChangePassword/*" element={<ChangePassword/>}/>
       </Routes>
     </BrowserRouter>
   );

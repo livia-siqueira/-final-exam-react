@@ -1,18 +1,17 @@
-import { FormEvent, useCallback, useEffect, useState } from "react";
-import { Header } from "../Header";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/store";
-import { AppDispatch } from "src/store";
-import { fetchGamesData } from "src/store/games/thunks";
-import { gameSelected } from "src/store/games";
-import { Button } from "../ButtonsGame/ButtonsGame";
-import { Container, Main, Title } from "./styles";
-import { UserActionGame } from "../UserActionGame";
-import { PageCart } from "../PageCart/index";
-import { BetArea } from "./BetArea";
 import toast from "react-hot-toast";
-import { addBetInUser } from "src/store/users/controlUsers/index";
+import { ChoiceGame, Container, Main, Title, Text } from "./styles";
+import { RootState, AppDispatch } from "src/store";
+import { fetchGamesData } from "@storeGames/thunks";
+import { gameSelected } from "@storeGames/index";
+import { addBetInUser } from "@storeUser/index";
+import { PageCart } from "@components/PageGame/PageCart/index";
+import { UserActionGame } from "../UserActionGame";
+import { BetArea } from "./BetArea";
+import { Header } from "../Header";
 import { ButtonsGame } from "../ButtonsGame";
+import { orderNumber } from "@utils/index";
 
 export default function PageBet() {
   const dispatch: AppDispatch = useDispatch();
@@ -31,6 +30,7 @@ export default function PageBet() {
 
   const gameActual = games.typesGame.find((game) => {
     if (game.type === gameActive) return game;
+    return '';
   });
 
   const ArrayMaxNumber: number[] = Array.from({
@@ -39,10 +39,10 @@ export default function PageBet() {
 
   const numberGame: number[] = ArrayMaxNumber.map((_, index) => index + 1);
 
- const  changeGameActual = (type: string) => {
+  const changeGameActual = (type: string) => {
     dispatch(gameSelected(type));
     handleClearGame();
-  }
+  };
 
   function handleClearGame() {
     setNumbersBet([]);
@@ -58,7 +58,7 @@ export default function PageBet() {
       if (maxNumbersSorted !== 0) {
         while (getNumbers.length < maxNumbersSorted) {
           const numberGame = Math.floor(Math.random() * qtdNumberSorted);
-          if (!getNumbers.includes(numberGame)) {
+          if (!getNumbers.includes(numberGame) && numberGame!==0) {
             getNumbers.push(numberGame);
           }
         }
@@ -79,11 +79,13 @@ export default function PageBet() {
         const existQtdNumber = numbers.length;
         const maxNumber = gameActual ? gameActual["max-number"] : 0;
         if (existQtdNumber >= maxNumber) {
-          return numbers;
+          if (existQtdNumber === maxNumber) {
+            toast.error("Já foram selecionados números suficientes");
+            return numbers;
+          }
+         
         }
-        else{
-          toast.error('Já foram selecionados números suficientes')
-        }
+
         return [...numbers, number];
       });
     },
@@ -96,11 +98,11 @@ export default function PageBet() {
     const game = maxNumberGame - numbersInCar;
     if (game !== 0)
       return toast.error(
-        `Hi, select the right amount of numbers\nPara ${gameActual?.type} selecione ${gameActual?.range}\nFaltam ${game} números 😉`
+        `Hi, select the right amount of numbers. \nFor ${gameActual?.type} select ${maxNumberGame} numbers. \n ${game} numbers are missing 😉`
       );
     const newBet = {
       bet: {
-        numbers: numberBet,
+        numbers: orderNumber(numberBet),
         type: gameActual ? gameActual.type : "erro",
         price: gameActual ? gameActual.price : 0,
         color: gameActual ? gameActual.color : "erro",
@@ -108,20 +110,22 @@ export default function PageBet() {
       user: userLogged ? userLogged.email : "erro",
     };
     dispatch(addBetInUser(newBet));
-    setNumbersBet([]);
-  }, [dispatch, handleClearGame, gameActual, numberBet]);
+    handleClearGame();
+  }, [dispatch, gameActual, numberBet, userLogged]);
 
   return (
     <>
-    <Header type="Home"/>
+      <Header type="Home" />
       <Container>
         <Main>
           <Title>
-            <b>New bet </b> for
+            <b>new bet </b> for
             <span> {gameActual?.type}</span>
           </Title>
-          <h3>Choose a game</h3>
-         <ButtonsGame select={changeGameActual}/>
+          <Text>Choose a game</Text>
+          <ChoiceGame>
+          <ButtonsGame select={changeGameActual} type={gameActive} />
+          </ChoiceGame>
           <BetArea
             arrayNumbersBet={numberGame}
             numberBet={numberBet}

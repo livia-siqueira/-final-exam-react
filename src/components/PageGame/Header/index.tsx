@@ -1,9 +1,10 @@
-import { Button, Header as HeaderPage } from "./styles";
-import {FiArrowRight} from 'react-icons/fi'
-import { AppDispatch } from "src/store";
-import { useDispatch } from "react-redux";
-import { logoutUser } from "src/store/users/controlUsers";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import {FiArrowRight} from 'react-icons/fi'
+import { Button, Header as HeaderPage } from "./styles";
+import { AppDispatch, RootState } from "src/store";
+import { logoutUser } from "@storeUser/index";
+import { gameSelected } from "@storeGames/index";
 
 interface propsHeader {
   type: string;
@@ -11,14 +12,16 @@ interface propsHeader {
 
 export function Header({type}: propsHeader) {
   const dispatch: AppDispatch = useDispatch();
+  const userLogged = useSelector((state : RootState) => state.users.userAuthenticated)
+  const Account = userLogged ? userLogged.name : 'Account';
   const navigate = useNavigate();
-
 
   const handleLogout = () => {
     dispatch(logoutUser())
     navigate("/")
   }
   const handleHome = () =>{
+    dispatch(gameSelected(''));
     navigate("/HomeUser")
   }
   const handleRegister = () => {
@@ -34,11 +37,11 @@ export function Header({type}: propsHeader) {
             <hr />
           </div>
           <div className="Home">
-           {type === "Home" ?  <button onClick={handleHome}>Home</button> : ''}
+           {type === "Home" ?  <Button onClick={handleHome}>Home</Button> : ''}
           </div>
         </div>
        { type !== "Nulo" ? <div className="header-rigth">
-          <Button>Account</Button>
+          <Button>{Account}</Button>
           <div className="logout">
             <Button onClick={handleLogout}>Log out <FiArrowRight/></Button>
           </div>
@@ -48,7 +51,6 @@ export function Header({type}: propsHeader) {
         </div>
         }
       </HeaderPage>
-      <hr />
     </>
   );
 }

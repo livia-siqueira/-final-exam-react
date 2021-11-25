@@ -12,11 +12,13 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #F7F7F7;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     width: 100%;
+    overflow: hidden;
 }
 
 html{
@@ -33,4 +35,14 @@ button {
     cursor: pointer;
 }
 
+`;
+
+export const Msg = styled.h2`
+  color: #27c383;
+  width: 100%;
+  font-style: italic;
+  padding-top: 80px;
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 60px;
 `;

@@ -1,50 +1,7 @@
-import { UsuarioState, Usuario } from "./types";
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
-import { validatePassword, validationEmail } from "src/store/general";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { validatePassword, validationEmail } from "@utils/index";
 import { toast } from "react-hot-toast";
-
-interface LoginData {
-  email?: string;
-  password?: string;
-}
-
-export interface Bet {
-  bet: {
-    id: string;
-    type: string;
-    color: string;
-    numbers: number[];
-    price: number;
-    date: string;
-  };
-  user: string;
-}
-
-export interface usuario {
-  name: string;
-  email: string;
-  password: string;
-  bets: Bet[];
-  id: string;
-}
-
-type Auth = {
-  users: usuario[];
-  isAutenthicated: boolean;
-  userAuthenticated: usuario | null;
-};
-
-type UpdateUser = Omit<usuario, "name" | "password" | "id">;
-
-type AddToCartData = {
-  bet: {
-    type: string;
-    color: string;
-    numbers: number[];
-    price: number;
-  },
-  user: string;
-};
+import {Auth, Usuario, LoginData, AddToCartData, Bet, propsRemoveBet, AddUser} from '@utils/types'
 
 const initialState: Auth = {
   users: [],
@@ -52,53 +9,68 @@ const initialState: Auth = {
   userAuthenticated: null,
 };
 
-interface propsRemoveBet {
-  user?: string,
-  id: string
-}
-
-const userSlice = createSlice({
+const controlUser = createSlice({
   name: "@users",
   initialState: initialState,
   reducers: {
-    addUser(state, { payload }: PayloadAction<Usuario>) {
+    addUser(state, { payload }: PayloadAction<AddUser>) {
       const { name, email, password } = payload;
-      if (email !== undefined && password !== undefined && name !== undefined) {
+      const hasUser = state.users.some((user) => {
+        return email === user.email;
+      });
+      if (!hasUser) {
         if (
-          validatePassword(password) &&
-          validationEmail(email) &&
-          name.length > 0
+          email !== undefined &&
+          password !== undefined &&
+          name !== undefined
         ) {
-          const newUser = {
-            name,
-            email,
-            password,
-            id: email,
-            bets: [],
-          };
-          state.users.push(newUser);
+          if (
+            validatePassword(password) &&
+            validationEmail(email) &&
+            name.length > 0
+          ) {
+            const newUser = {
+              name,
+              email,
+              password,
+              id: email,
+              bets: [],
+            };
+            state.users.push(newUser);
+            toast.success("Registration performed successfully, log in")
+          }
+          else{
+            toast.error("Password must have a capital character and at least 9 characters")
+          }
         }
+      }
+      else{
+        toast.success("You are already registered, log in");
       }
       return state;
     },
     loginUser(state, { payload }: PayloadAction<LoginData>) {
       const { email, password } = payload;
       if (email !== undefined && password !== undefined) {
-        if (validationEmail(email) && validatePassword(password)) {
           const existentUser = state.users.find(
             (user) => user.email === email && user.password === password
           );
           if (existentUser) {
             state.isAutenthicated = true;
             state.userAuthenticated = existentUser;
-            toast.success(
-              `Olá, ${existentUser.name}! Boa sorte em suas apostas 🤞`
-            );
+            toast.success(`Olá, ${existentUser.name}! Bem vindo ✨`);
+            return state;
           } else {
-            toast.error("Credenciais inválidas");
+            const hasEmail = state.users.some((user) => {
+              return user.email === email;
+            });
+            if (hasEmail) {
+              toast.error("Incorrect password 😥");
+            } else {
+              toast.error("Sign up to play 😉");
+            }
             return;
           }
-        }
       }
     },
     addBetInUser(state, { payload }: PayloadAction<AddToCartData>) {
@@ -109,56 +81,73 @@ const userSlice = createSlice({
           id: `${idBet}`,
           date: new Date().toString(),
         },
-        user: payload.user, 
+        user: payload.user,
       };
 
-     state.users.map((user) => {
+      state.users.map((user) => {
         if (user.email === payload.user) {
-           user.bets.push(newBet)
-           if(state.userAuthenticated?.bets){
-             state.userAuthenticated.bets = user.bets;
-           }
+          user.bets.push(newBet);
+          if (state.userAuthenticated?.bets) {
+            state.userAuthenticated.bets = user.bets;
+          }
         }
+        return state;
       });
       return state;
     },
-    removeBet(state, {payload} : PayloadAction<propsRemoveBet>){
+    removeBet(state, { payload }: PayloadAction<propsRemoveBet>) {
       const user = state.users.find((user) => {
-        return user.email === payload.user
-      })
-      if(user){
-
+        return user.email === payload.user;
+      });
+      if (user) {
         const newBets = user.bets.filter((bet) => {
           return bet.bet.id !== payload.id;
         });
 
-        if(state.userAuthenticated?.bets){
+        if (state.userAuthenticated?.bets) {
           state.userAuthenticated.bets = newBets;
           state.users.map((user) => {
-            if(user.email === payload.user){
-              user.bets = newBets
+            if (user.email === payload.user) {
+              user.bets = newBets;
             }
-          })
-      }
-     
-      
+            return state;
+          });
+        }
       }
     },
-    addBetsInCart(state, {payload} : PayloadAction<usuario>){
-      if(!state.userAuthenticated) return;
+    addBetsInCart(state, { payload }: PayloadAction<Usuario>) {
+      if (!state.userAuthenticated) return;
       state.userAuthenticated.bets = [];
       state.users.map((user) => {
-        if(user.id === payload.id){
+        if (user.id === payload.id) {
           user.bets = [];
         }
-      })
+        return state;
+      });
     },
-    logoutUser(state, {payload} : PayloadAction){
+    logoutUser(state) {
       state.userAuthenticated = null;
       state.isAutenthicated = false;
+    },
+    updatePassword(state, {payload} : PayloadAction<Usuario>){
+      state.users = state.users.map((user) => {
+        if(user.email === payload.email) {
+          user = payload;
+          state.userAuthenticated = payload;
+        }
+        return user;
+      })
     }
   },
 });
 
-export default userSlice.reducer;
-export const { addUser, loginUser, addBetInUser, removeBet, addBetsInCart, logoutUser } = userSlice.actions;
+export default controlUser.reducer;
+export const {
+  addUser,
+  loginUser,
+  addBetInUser,
+  removeBet,
+  addBetsInCart,
+  logoutUser,
+  updatePassword,
+} = controlUser.actions;

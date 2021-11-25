@@ -52,7 +52,6 @@ export const ButtonSignUp = styled.button`
 
 export const TitleForm = styled.h1`
   text-align: center;
-  font: italic normal bold 35px/70px Helvetica Neue;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;

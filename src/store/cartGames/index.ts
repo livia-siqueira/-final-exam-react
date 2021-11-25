@@ -1,38 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { dispatch } from "react-hot-toast/dist/core/store";
-import { Bet, usuario } from "../users/controlUsers";
-
-
-
-interface betInCart {
-  cart: Bet[],
-  totalPrice: number
-  
-}
+import { betInCart, propsActionAddCart } from "@utils/types";
 
 const initialState : betInCart = {
   cart: [],
   totalPrice: 0
 }
 
-interface propsAction {
-  bet: Bet[]
-}
-
-const cart = createSlice({
+const controlCart = createSlice({
   name: "@bets",
   initialState,
   reducers: {
-   addToCart(state, {payload} : PayloadAction<propsAction>){
+   addToCart(state, {payload} : PayloadAction<propsActionAddCart>){
      payload.bet.map((bet) => {
        state.cart.push(bet);
        state.totalPrice += bet.bet.price
+       return state;
      })
    }
   },
 });
 
 
-export default cart.reducer;
-export const {addToCart} = cart.actions
+export default controlCart.reducer;
+export const {addToCart} = controlCart.actions
 

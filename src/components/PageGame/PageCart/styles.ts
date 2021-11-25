@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   background-color: white;
@@ -8,39 +7,69 @@ export const Container = styled.div`
   border-radius: 10px;
   opacity: 1;
   padding-left: 15px;
-  width: 310px;
-  max-height: 400px;
+  padding-right: 20px;
+  width: 250px;
+  max-height: 380px;
 `;
 
-export const SaveCart = styled.button`
+export const SaveCart = styled.footer`
   background-color: #f4f4f4;
-  width: 324px;
-  height: 96px;
   border: 1px solid #e2e2e2;
   border-top: 0;
   border-radius: 0 0 12px 12px;
   text-align: center;
-  color: #27c383;
-  opacity: 1;
-  position: absolute;
-  margin-left: 630px;
-  margin-top: 350px;
-  font-size: 35px;
-  font-weight: bold;
+  height: 96px;
+  width: 114%;
+  margin-left: -15px;
+
+  button {
+    background-color: transparent;
+    border: 0;
+    color: #27c383;
+    opacity: 1;
+    font-size: 35px;
+    font-weight: bold;
+  }
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+  font-variant: small-caps;
+  font-weight: 200;
+  font-style: italic;
+  margin-bottom: 0;
+`;
 
 export const Bets = styled.ul`
   overflow-x: hidden;
   overflow-y: auto;
   height: 200px;
-  margin-top: 20px;
   display: block;
+  padding-right: 4px;
   padding-left: 0;
+  width: 270px;
+  margin:0;
+  ::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0.4rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #707070;
+    border-radius: 20px;
+  }
+  @media (max-width: 906px) {
+    max-height: min(40rem, 45vh);
+  }
 `;
 
-export const CartTotal = styled.span``;
+export const CartTotal = styled.span`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+`;
 
 export const InputPrice = styled.input`
   border: none;

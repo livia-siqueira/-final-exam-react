@@ -1,5 +1,4 @@
-import { TitlePrincipal } from "./styles";
-import { Connect } from "react-redux";
+import { SubText, TitlePrincipal } from "./styles";
 export function MainText() {
 
   return (
@@ -12,7 +11,7 @@ export function MainText() {
         App
         <br />
         <span>for</span>
-        <h1>lottery</h1>
+        <SubText>lottery</SubText>
       </TitlePrincipal>
     </>
   );

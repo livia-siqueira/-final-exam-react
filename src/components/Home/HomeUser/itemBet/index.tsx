@@ -1,6 +1,4 @@
 import {
-  AreaAction,
-  Button,
   Container,
   ContentBet,
   Data,
@@ -9,10 +7,6 @@ import {
   Price,
   Section,
 } from "./styles";
-import { FiTrash2 } from "react-icons/fi";
-import { useSelector } from "react-redux";
-import { RootState } from "src/store";
-import { Bet } from "src/store/users/controlUsers";
 
 interface AddToCartData {
   color: string;
@@ -75,21 +69,21 @@ export function ItemBet(props: AddToCartData) {
         <Numbers>{props.numbers.join(",")}</Numbers>
         <Section color={props.color}>
           <ContentBet>
-          <Data>
-            {Day}/{MonthInt}/{Year}
-            <span>-</span>
-          </Data>
-          <Price>
-            ({" "}
-            {new Intl.NumberFormat("pt-br", {
-              style: "currency",
-              currency: "BRL",
-            }).format(props.price)}
-            )
-          </Price>
+            <Data>
+              {Day}/{MonthInt}/{Year}
+              <span>-</span>
+            </Data>
+            <Price>
+              ({" "}
+              {new Intl.NumberFormat("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              }).format(props.price)}
+              )
+            </Price>
           </ContentBet>
           <div>
-          <span>{props.type}</span>
+            <span>{props.type}</span>
           </div>
         </Section>
       </Main>

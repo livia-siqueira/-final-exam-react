@@ -2,73 +2,67 @@ import styled from "styled-components";
 
 export const Header = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   justify-items: center;
-  margin: 0 auto;
-  width: 70%;
-  height: 70px;
+  margin: 0px auto;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #ebebeb;
 
   .header-left {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 15px;
+    display: flex;
+    align-items: center;
   }
 
-    .nameCompany {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0px;
-    }
-    .logout {
-      display: flex;
-      justify-content: center;
-      justify-items: center;
-    }
-    .nameCompany hr {
-      width: 90px;
-      margin: 0;
-      padding: 0;
-      background-color: #b5c401;
-      height: 5px;
-      border-radius: 5px;
-    }
-    .header-rigth {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      margin-top: 15px;
-    }
-    .logout span {
-      text-align: center;
-    }
-    img {
-      margin-top: 22px;
-      margin-left: 8px;
-      width: 20px;
-      height: 20px;
-      color: #707070;
-    }
-    h1 {
-      margin: 0;
-      text-align: center;
-      font-size: 50px;
-      font-weight: normal;
-      letter-spacing: 0px;
-      color: #707070;
-      opacity: 1;
-    }
+  .Home{
+    margin-left: 20px;
+  }
+
+  .nameCompany {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0px;
+    margin-top: 20px;
+  }
+  .logout {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+  }
+  .nameCompany hr {
+    width: 90px;
+    padding: 0;
+    background-color: #b5c401;
+    height: 6px;
+    border-radius: 5px;
+  }
+  .header-rigth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  .logout span {
+    text-align: center;
+  }
+  h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+    margin: 0;
+  }
 `;
 
-
-export const Button = styled.button` 
+export const Button = styled.button`
   background-color: transparent;
-  font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-      text-align: center;
-      color: #707070;
-      opacity: 1;
-      border: 0;
-
-`
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #707070;
+  opacity: 1;
+  border: 0;
+  font-style: italic;
+`;

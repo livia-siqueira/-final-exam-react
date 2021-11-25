@@ -1,3 +1,7 @@
+import { useDispatch} from "react-redux";
+import { useNavigate } from "react-router";
+import { FiArrowRight } from "react-icons/fi";
+import { AppDispatch} from "src/store";
 import {
   Bets,
   CartTotal,
@@ -7,16 +11,14 @@ import {
   SaveCart,
   Title,
 } from "./styles";
-import { FiArrowRight } from "react-icons/fi";
+import {Msg} from '../../../stylesGlobal/global'
+import { Bet } from "@utils/types";
+import { saveCart } from "@storeCart/thunks";
+import { addToCart } from "@storeCart/index";
 import { ItemList } from "./itemListCart";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "src/store";
-import { Game } from "src/store/games/types";
-import { Bet } from "src/store/users/controlUsers";
-import { saveCart } from "src/store/cartGames/thunks";
-import { addToCart } from "src/store/cartGames";
-import { at } from "lodash";
-import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
+import { gameSelected } from "@storeGames/index";
+
 
 interface propsBet {
   bets: Bet[]
@@ -26,38 +28,49 @@ interface propsBet {
 export function PageCart(props: propsBet) {
   const dispatch : AppDispatch = useDispatch()
   const navigate = useNavigate();
-  const valuesBets : number[] = [];
 
   const handleSaveCartInBet = () => {
     if(props.bets) {
-      dispatch(addToCart({bet: props.bets}));
-      dispatch(saveCart())
-      navigate("/HomeUser");
+      if(totalPrice >= 30){
+        dispatch(addToCart({bet: props.bets}));
+        dispatch(saveCart());
+        dispatch(gameSelected(''));
+        navigate("/HomeUser");
+      }
+      else{
+        const missing = 30.00 - totalPrice;
+        toast.error(`Minimum amount is R$30,00. To save, add more ${new Intl.NumberFormat("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        }).format(missing)} to bets.`)
+      }
+    
     }
   }
 
-  props.bets.map((bet) => {
-    valuesBets.push(bet.bet.price)
+  const valuesBets = props.bets.map((bet) => {
+    return bet.bet.price;
   })
-
- 
 
   if(props.bets.length === 0){
     return (
       <>
       <Container>
         <Title>Cart</Title>
-       <p>Carrinho vazio</p>
+       <Msg>Your shopping cart is empty</Msg>
         <FooterCart>
           <CartTotal>
-            <strong>cart </strong> total:
+            <strong>cart </strong>  total:
             <InputPrice type="text" id="inputPrice" value="R$0,00" disabled />
           </CartTotal>
         </FooterCart>
-      </Container>
-      <SaveCart onClick={handleSaveCartInBet}>
-        Save <FiArrowRight />
+        <div>
+        <SaveCart>
+        <button>Save <FiArrowRight /></button>
       </SaveCart>
+      </div>
+      </Container>
+    
     </>
     )
   }
@@ -66,7 +79,7 @@ export function PageCart(props: propsBet) {
    
     <>
       <Container>
-        <Title>Cart</Title>
+        <Title>cart</Title>
         <Bets>
           {props.bets.map((bet) => {
             return <ItemList key={bet.bet.id} bet={bet} />
@@ -81,10 +94,11 @@ export function PageCart(props: propsBet) {
             }).format(totalPrice)} disabled />
           </CartTotal>
         </FooterCart>
-      </Container>
-      <SaveCart onClick={handleSaveCartInBet}>
-        <p>Save <FiArrowRight /></p>
+        <SaveCart onClick={handleSaveCartInBet}>
+        <button>Save <FiArrowRight /></button>
       </SaveCart>
+      </Container>
+     
     
     </>
   );

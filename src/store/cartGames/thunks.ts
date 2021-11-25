@@ -1,10 +1,6 @@
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { AppDispatch, RootState } from "src/store"
-import { addBetsInCart, usuario } from "../users/controlUsers";
-
-
+import { addBetsInCart } from "../users/controlUsers";
 
 export const saveCart = createAsyncThunk<  void,
 undefined,

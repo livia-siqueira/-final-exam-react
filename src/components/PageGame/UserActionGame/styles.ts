@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  margin-top: 30px;
+  margin-top: 100px;
+  margin-bottom: 0px;
 `;
 
 export const Button = styled.button`
   background-color: transparent;
   border: 1px solid #27c383;
   border-radius: 10px;
-  max-width: 209px;
+  max-width: 150px;
   height: 52px;
   color: #27c383;
   opacity: 1;
@@ -21,7 +22,7 @@ export const ButtonAddCart = styled.button`
   border-radius: 10px;
   color: var(--white);
   font-size: 1rem;
-  width: 209px;
+  width: 200px;
   height: 52px;
   display: flex;
   align-items: center;

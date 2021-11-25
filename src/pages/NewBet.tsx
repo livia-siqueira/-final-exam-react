@@ -1,25 +1,24 @@
 import { FooterPage } from "@components/FooterPages";
-import { Container } from "@components/Home/FormLogin/styles";
+import { PageError } from "@components/PageError";
 import { Header } from "@components/PageGame/Header";
 import PageBet from "@components/PageGame/PageBet";
-import Page from "@components/PageGame/PageBet";
-import { PageCart } from "@components/PageGame/PageCart/index";
-import { ContainerBet } from "./styles";
+import { Footer } from "./styles";
 
-export function NewBet(props: {isAutorization: boolean}) {
-
-  if(!props.isAutorization) { 
+export function NewBet(props: { isAutorization: boolean }) {
+  if (!props.isAutorization) {
     return (
       <>
-      <Header type="Nulo"/>
-      <button>Faça Login ou cadastre-se</button>
+        <Header type="Nulo" />
+        <PageError />
       </>
-    )
-  } ;
+    );
+  }
   return (
     <>
-        <PageBet />
-        <FooterPage/>
+      <PageBet />
+      <Footer>
+        <FooterPage />
+      </Footer>
     </>
   );
 }

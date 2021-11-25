@@ -1,34 +1,42 @@
+import { useNavigate } from "react-router";
+import { FiArrowRight } from "react-icons/fi/";
+import { FormEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   ButtonSignUp,
   Container,
+  Content,
   SpanForgetPassword,
   TitleForm,
 } from "./styles";
-import { FiArrowRight } from "react-icons/fi/";
-import { Input } from "../../UI/Input/styles";
-import { FormEvent, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/store";
-import { useNavigate } from "react-router";
-import { loginUser } from "src/store/users/controlUsers/index";
+import { Input } from "@components/UI/Input/styles";
+import { loginUser } from "@storeUser/index";
 import toast from "react-hot-toast";
+import { RootState } from "src/store";
 
+interface propsLogin {
+  title: string;
+  type: string;
+  value?: string
+}
 
-export function FormLogin() {
+export function FormLogin(props: propsLogin) {
   const navigate = useNavigate();
   const [inputEmail, setInputEmail] = useState<string>();
-  const [inputSenha, setInputSenha] = useState<string>();
-  const dispatch = useDispatch(); 
-  const userLogged = useSelector((state: RootState) => state.users.isAutenthicated)
+  const [inputPassword, setInputPassword] = useState<string>();
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.users.users);
 
   function handlerLogin(event: FormEvent) {
     event.preventDefault();
-    dispatch(loginUser({email: inputEmail, password: inputSenha}));
-    if(userLogged) {
-      navigate('/HomeUser')
+    if (inputEmail && inputPassword) {
+      dispatch(loginUser({ email: inputEmail, password: inputPassword }));
+      const exist = user.some((user) => user.email === inputEmail);
+      navigate(`${exist ? "/HomeUser" : ""}`);
+    } else {
+      toast.error("Fill in the fields");
     }
-    
   }
 
   function register(event: FormEvent) {
@@ -36,34 +44,41 @@ export function FormLogin() {
     navigate("/Registration");
   }
 
+  function resetPassword() {
+    navigate("/ResetPassword");
+  }
+
   return (
     <>
-      <div>
-        <TitleForm>Authentication</TitleForm>
-        <Container onSubmit={handlerLogin}>
+      <Content>
+        <TitleForm>{props.title}</TitleForm>
+        <Container>
           <Input
             type="Email"
             placeholder="Email"
+            value={inputEmail}
             onChange={(event) => setInputEmail(event.target.value)}
           />
           <Input
             type="password"
             placeholder="Password"
-            onChange={(event) => setInputSenha(event.target.value)}
+            onChange={(event) => setInputPassword(event.target.value)}
           />
-          <SpanForgetPassword>
-            {" "}
-            <a href="/ResetPassword">I forget my password</a>{" "}
-          </SpanForgetPassword>
-          <Button>
-            {" "}
-            Log In <FiArrowRight color="#B5C401" />{" "}
+          {props.type === "Login" ? (
+            <SpanForgetPassword>
+              <button onClick={resetPassword}>I forget my password</button>
+            </SpanForgetPassword>
+          ) : (
+            ""
+          )}
+          <Button onClick={handlerLogin}>
+            <span>{props.type}</span> <FiArrowRight color="#B5C401" />
           </Button>
         </Container>
         <ButtonSignUp type="submit" onClick={register}>
-          Sign Up <FiArrowRight color="#535351" />
+          <span>Sign Up</span> <FiArrowRight color="#535351" />
         </ButtonSignUp>
-      </div>
+      </Content>
     </>
   );
 }
