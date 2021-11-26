@@ -10,11 +10,11 @@ import {
   Content,
   TitleForm,
 } from "./styles";
-import { Input } from "../../UI/Input/styles";
+import { Input } from "../UI/Input/styles";
 import { addUser } from "@storeUser/index";
 
 
-export function FormRegister() {
+export function FormRegistration() {
 
   const [inputName, setInputName] = useState<string>();
   const [inputEmail, setInputEmail] = useState<string>();

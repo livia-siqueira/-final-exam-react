@@ -1,0 +1,12 @@
+export {ButtonsBet} from './ButtonsBet';
+export {ButtonsGame} from './ButtonsGame';
+export {Cart} from './Cart';
+export {Footer} from './FooterPages';
+export {GameArea} from './GameArea';
+export {GameControls} from './GameControls';
+export {Header} from './Header';
+export {ItemBet} from './ItemBet';
+export {ItemCart} from './ItemCart';
+export {MainText} from './MainText';
+export {PageError} from './PageError';
+export {FormLogin, FormRegistration, FormResetPassword} from "./Forms";

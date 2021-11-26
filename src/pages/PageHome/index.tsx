@@ -11,16 +11,16 @@ import {
   Container,
   ButtonNeutralFilter,
 } from "./styles";
-import { Msg } from "../../../stylesGlobal/global";
-import { ItemBet } from "./itemBet";
-import { Header } from "@components/PageGame/Header";
-import { ButtonsGame } from "@components/PageGame/ButtonsGame";
+import { Msg } from "../../stylesGlobal/global";
+import { ItemBet } from "@components/ItemBet";
+import { Header } from "@components/Header";
+import { ButtonsGame } from "@components/ButtonsGame";
 import { fetchGamesData } from "@storeGames/thunks";
-import { Bet } from "@utils/types";
+import { Bet } from "src/shared/utils/types";
 import { gameSelected } from "@storeGames/index";
 import { useNavigate } from "react-router";
 
-export default function HomeUser() {
+export function Home() {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -96,7 +96,7 @@ export default function HomeUser() {
               return '';
             })
           ) : (
-            <Msg>You don't have recent bets</Msg>
+            <Msg>You don't have recent bets. <br/>Start betting now. Click on the "New Bet" button</Msg>
           )}
         </Bets>
       </Container>

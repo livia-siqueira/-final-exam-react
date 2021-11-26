@@ -6,7 +6,7 @@ interface propsBetArea {
   handleClearGame: () => void
   handleAddCart: () => void
 }
-export function UserActionGame(props: propsBetArea) {
+export function GameControls(props: propsBetArea) {
   return (
     <Container>
       <ContainerButtonGame>

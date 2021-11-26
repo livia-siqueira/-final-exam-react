@@ -24,6 +24,14 @@ body {
     @media(max-width: 720px){
         overflow-y: scroll;
     }
+
+
+    input:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    border-bottom: 1px solid #868686;
+    outline: 0;
+} 
 }
 
 html{

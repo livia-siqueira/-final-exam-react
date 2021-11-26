@@ -1,13 +1,13 @@
 import { FiArrowRight, FiArrowLeft } from "react-icons/fi/";
-import { Button, ButtonBack, Container, TitleForm } from "./styles";
-import { Input } from "../../UI/Input/styles";
+import { Button, Container, TitleForm } from "./styles";
+import { Input } from "../UI/Input/styles";
 import { useNavigate } from "react-router";
 import { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/store";
 import toast from "react-hot-toast";
 
-function FormResetPassword() {
+export function FormResetPassword() {
   const navigate = useNavigate();
   const [inputEmail, setInputEmail] = useState<string>();
   const users = useSelector((state: RootState) => state.users.users);
@@ -42,12 +42,11 @@ function FormResetPassword() {
             <Button onClick={resetPassword}>
               Send link <FiArrowRight color="#B5C401" />
             </Button>
-            <ButtonBack onClick={handlerBackLogin}>
+            <Button onClick={handlerBackLogin}>
             <FiArrowLeft color="#868686" /> Back 
-            </ButtonBack>
+            </Button>
           </Container>
         </div>
       </>
     )
 }
-export default FormResetPassword;

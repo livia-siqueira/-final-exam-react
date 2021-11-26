@@ -1,0 +1,1 @@
+export {FiArrowRight, FiArrowLeft} from 'react-icons/fi';

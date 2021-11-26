@@ -6,11 +6,11 @@ export const Input = styled.input`
   border-bottom: 1px solid #dddddd;
   padding: 3px;
   padding-right: 0;
+  padding-left: 20px;
   font-weight: bold;
   font-style: italic;
 
-  ::placeholder{
-    color: #9D9D9D;
-    padding-left: 20px;
+  ::placeholder {
+    color: #9d9d9d;
   }
 `;

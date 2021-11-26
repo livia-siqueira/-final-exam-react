@@ -11,11 +11,11 @@ import {
   SaveCart,
   Title,
 } from "./styles";
-import {Msg} from '../../../stylesGlobal/global'
-import { Bet } from "@utils/types";
+import {Msg} from '../../stylesGlobal/global'
+import { Bet } from "src/shared/utils/types";
 import { saveCart } from "@storeCart/thunks";
 import { addToCart } from "@storeCart/index";
-import { ItemList } from "./itemListCart";
+import { ItemCart } from "@components/index";
 import toast from "react-hot-toast";
 import { gameSelected } from "@storeGames/index";
 
@@ -25,7 +25,7 @@ interface propsBet {
 }
 
 
-export function PageCart(props: propsBet) {
+export function Cart(props: propsBet) {
   const dispatch : AppDispatch = useDispatch()
   const navigate = useNavigate();
 
@@ -82,7 +82,7 @@ export function PageCart(props: propsBet) {
         <Title>cart</Title>
         <Bets>
           {props.bets.map((bet) => {
-            return <ItemList key={bet.bet.id} bet={bet} />
+            return <ItemCart key={bet.bet.id} bet={bet} />
           })}
         </Bets>
         <FooterCart>

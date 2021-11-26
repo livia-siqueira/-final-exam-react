@@ -6,14 +6,10 @@ import { RootState, AppDispatch } from "src/store";
 import { fetchGamesData } from "@storeGames/thunks";
 import { gameSelected } from "@storeGames/index";
 import { addBetInUser } from "@storeUser/index";
-import { PageCart } from "@components/PageGame/PageCart/index";
-import { UserActionGame } from "../UserActionGame";
-import { BetArea } from "./BetArea";
-import { Header } from "../Header";
-import { ButtonsGame } from "../ButtonsGame";
-import { orderNumber } from "@utils/index";
+import { orderNumber } from "src/shared/utils/index";
+import {Cart, GameControls, GameArea, Header, ButtonsGame} from '@components/index'
 
-export default function PageBet() {
+export function PageBet() {
   const dispatch: AppDispatch = useDispatch();
   const [numberBet, setNumbersBet] = useState<number[]>([]);
 
@@ -126,7 +122,7 @@ export default function PageBet() {
           <ChoiceGame>
           <ButtonsGame select={changeGameActual} type={gameActive} />
           </ChoiceGame>
-          <BetArea
+          <GameArea
             arrayNumbersBet={numberGame}
             numberBet={numberBet}
             handleCompleteGame={handleCompleteGame}
@@ -134,13 +130,13 @@ export default function PageBet() {
             handleNoSelectedNumber={handleNoSelectNumber}
             gameActual={gameActual ? gameActual : null}
           />
-          <UserActionGame
+          <GameControls
             handleCompleteGame={handleCompleteGame}
             handleClearGame={handleClearGame}
             handleAddCart={handleAddCart}
           />
         </Main>
-        <PageCart bets={userLogged ? userLogged.bets : []} />
+        <Cart bets={userLogged ? userLogged.bets : []} />
       </Container>
     </>
   );

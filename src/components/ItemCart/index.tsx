@@ -3,13 +3,13 @@ import { FiTrash2 } from "react-icons/fi";
 import { AppDispatch} from "src/store";
 import { AreaAction, Button, Container, Main, Numbers, Price, Section } from "./styles";
 import { removeBet } from "@storeUser/index";
-import {Bet} from '@utils/types';
+import {Bet} from 'src/shared/utils/types';
 
 interface AddToCartData {
   bet: Bet;
 }
 
-export function ItemList(props: AddToCartData) {
+export function ItemCart(props: AddToCartData) {
   const dispatch: AppDispatch = useDispatch();
 
   const handleRemoveBet = (id: string) => {

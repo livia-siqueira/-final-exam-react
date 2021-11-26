@@ -1,5 +1,5 @@
-import { ButtonsBet } from "@components/PageGame/ButtonsBet";
-import { Game } from "src/utils/types";
+import { ButtonsBet } from "@components/ButtonsBet";
+import { Game } from "src/shared/utils/types";
 import { Buttons, Container, Description } from "./styles";
 
 
@@ -12,7 +12,7 @@ interface propsBetArea {
     gameActual: Game | null;
   }
 
-export function BetArea(props: propsBetArea) {
+export function GameArea(props: propsBetArea) {
   return (
     <Container>
       <Description><b>Fill your bet</b></Description>

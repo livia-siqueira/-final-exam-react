@@ -15,13 +15,8 @@ import { loginUser } from "@storeUser/index";
 import toast from "react-hot-toast";
 import { RootState } from "src/store";
 
-interface propsLogin {
-  title: string;
-  type: string;
-  value?: string
-}
 
-export function FormLogin(props: propsLogin) {
+export function FormLogin() {
   const navigate = useNavigate();
   const [inputEmail, setInputEmail] = useState<string>();
   const [inputPassword, setInputPassword] = useState<string>();
@@ -51,7 +46,7 @@ export function FormLogin(props: propsLogin) {
   return (
     <>
       <Content>
-        <TitleForm>{props.title}</TitleForm>
+        <TitleForm>Authentication</TitleForm>
         <Container>
           <Input
             type="Email"
@@ -64,15 +59,11 @@ export function FormLogin(props: propsLogin) {
             placeholder="Password"
             onChange={(event) => setInputPassword(event.target.value)}
           />
-          {props.type === "Login" ? (
             <SpanForgetPassword>
               <button onClick={resetPassword}>I forget my password</button>
             </SpanForgetPassword>
-          ) : (
-            ""
-          )}
           <Button onClick={handlerLogin}>
-            <span>{props.type}</span> <FiArrowRight color="#B5C401" />
+            <span>Login</span> <FiArrowRight color="#B5C401" />
           </Button>
         </Container>
         <ButtonSignUp type="submit" onClick={register}>
@@ -82,3 +73,4 @@ export function FormLogin(props: propsLogin) {
     </>
   );
 }
+
