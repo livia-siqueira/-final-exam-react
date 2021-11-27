@@ -13,7 +13,7 @@ export function RoutesProject() {
       <Routes>
         <Route path="/*" element={<PageEntry />} />
         <Route
-          path="/HomeUser"
+          path="/Home"
           element={<Home  />}
         />
         <Route

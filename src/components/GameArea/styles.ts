@@ -29,7 +29,7 @@ export const Buttons = styled.div<propsButton>`
   margin-bottom: 4rem;
 
   button {
-    width: ${(props) => (props.qtd > 25 ? 35 : 53)}px ;
-    height: ${(props) => (props.qtd > 25 ? 35 : 53)}px;
+    width: ${(props) => (props.qtd > 25 ? 3 : 3.938)}rem ;
+    height: ${(props) => (props.qtd > 25 ? 3 : 3.938)}rem;
   }
 `;

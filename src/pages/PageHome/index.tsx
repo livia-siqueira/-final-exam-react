@@ -2,19 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { AppDispatch, RootState } from "src/store";
-import {
-  Title,
-  Bets,
-  NewBet,
-  AreaFilter,
-  ButtonsFilter,
-  Container,
-  ButtonNeutralFilter,
-} from "./styles";
-import { Msg } from "../../stylesGlobal/global";
-import { ItemBet } from "@components/ItemBet";
-import { Header } from "@components/Header";
-import { ButtonsGame } from "@components/ButtonsGame";
+import * as Styles from "./styles";
+import { ItemBet, Header, ButtonsGame } from "@components/index";
 import { fetchGamesData } from "@storeGames/thunks";
 import { Bet } from "src/shared/utils/types";
 import { gameSelected } from "@storeGames/index";
@@ -28,57 +17,69 @@ export function Home() {
   }, [dispatch]);
 
   const user = useSelector((state: RootState) => state.users.userAuthenticated);
-  const typesGames = useSelector((state: RootState) => state.games.typesGame)
+  const typesGames = useSelector((state: RootState) => state.games.typesGame);
   const cart = useSelector((state: RootState) => state.cart.cart);
   const betsUser = cart.filter((bet) => bet.user === user?.email);
   const [bets, setTypes] = useState<Bet[]>(betsUser);
 
+  console.log(bets);
+
   const handleFilterGame = useMemo(
     () => (type: string) => {
-      setTypes(betsUser);
       setTypes((bets) => {
-        const filter = bets.filter((bet) => {
-          return bet.bet.type === type;
+        const newBet: Bet[] = betsUser.filter((bet) => {
+          if (bet.bet.type === type) {
+            const arrayFilter = bets?.filter((Bet) => {
+              return Bet.bet.type !== type;
+            });
+            return arrayFilter;
+          } else {
+            return bets?.push(bet);
+          }
         });
-        return filter;
+        return newBet
       });
     },
     [betsUser]
   );
 
-  
   const typeSelected = typesGames.filter((game) => {
-    const g = bets.find((bet) => {
+    const g = bets?.find((bet) => {
       return bet.bet.type === game.type;
-    })
+    });
 
     return g ? game.type : undefined;
-  }) 
+  });
+
   const clearFilter = () => {
     setTypes(betsUser);
-  }
+  };
 
   const changeGameActive = () => {
-    dispatch(gameSelected('Lotofácil'));
-    navigate("/NewBet")
-  }
-
+    dispatch(gameSelected("Lotofácil"));
+    navigate("/NewBet");
+  };
   return (
     <>
       <Header type="HomeUser" />
-      <Container>
-        <AreaFilter>
-          <Title>recente games</Title>
-          <ButtonsFilter>
+      <Styles.Container>
+        <Styles.AreaFilter>
+          <Styles.Title>recente games</Styles.Title>
+          <Styles.ButtonsFilter>
             <span>Filters</span>
-            <ButtonsGame select={handleFilterGame} type={typeSelected.length > 0 ? typeSelected[0].type : undefined } />
-            <ButtonNeutralFilter onClick={clearFilter}>Limpar filtro</ButtonNeutralFilter>
-          </ButtonsFilter>
-          <NewBet onClick={changeGameActive}>
+            <ButtonsGame
+              select={handleFilterGame}
+              type={typeSelected.length > 0 ? typeSelected[0].type : undefined}
+            />
+            <Styles.ButtonNeutralFilter onClick={clearFilter}>
+              Limpar filtro
+            </Styles.ButtonNeutralFilter>
+          </Styles.ButtonsFilter>
+          <Styles.NewBet onClick={changeGameActive}>
             New Bet <FiArrowRight />
-          </NewBet>
-        </AreaFilter>
-        <Bets>
+          </Styles.NewBet>
+        </Styles.AreaFilter>
+        <Styles.Bets>
           {bets.length !== 0 ? (
             bets.map((bet) => {
               if (bet.user === user?.email) {
@@ -93,13 +94,13 @@ export function Home() {
                   />
                 );
               }
-              return '';
+              return "";
             })
           ) : (
-            <Msg>You don't have recent bets. <br/>Start betting now. Click on the "New Bet" button</Msg>
+            <p>hi</p>
           )}
-        </Bets>
-      </Container>
+        </Styles.Bets>
+      </Styles.Container>
     </>
   );
 }

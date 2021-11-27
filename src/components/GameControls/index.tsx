@@ -1,5 +1,5 @@
-import { Button, ButtonAddCart, Container, ContainerButtonAddCart, ContainerButtonGame } from "./styles";
-import {AiOutlineShoppingCart} from 'react-icons/ai'
+import * as SC from "./styles";
+import {AiOutlineShoppingCart} from '@sharedAssets/index'
 
 interface propsBetArea {
   handleCompleteGame: () => void
@@ -8,14 +8,14 @@ interface propsBetArea {
 }
 export function GameControls(props: propsBetArea) {
   return (
-    <Container>
-      <ContainerButtonGame>
-        <Button  onClick={props.handleCompleteGame}>Complete game</Button>
-        <Button onClick={props.handleClearGame}>Clear game</Button>
-      </ContainerButtonGame>
-      <ContainerButtonAddCart>
-        <ButtonAddCart onClick={props.handleAddCart}><AiOutlineShoppingCart size="26"/>Add to Cart</ButtonAddCart>
-      </ContainerButtonAddCart>
-    </Container>
+    <SC.Container>
+      <SC.ContainerButtonGame>
+        <SC.Button  onClick={props.handleCompleteGame}>Complete game</SC.Button>
+        <SC.Button onClick={props.handleClearGame}>Clear game</SC.Button>
+      </SC.ContainerButtonGame>
+      <SC.ContainerButtonAddCart>
+        <SC.ButtonAddCart onClick={props.handleAddCart}><span><AiOutlineShoppingCart size="25"/></span>Add to Cart</SC.ButtonAddCart>
+      </SC.ContainerButtonAddCart>
+    </SC.Container>
   );
 }

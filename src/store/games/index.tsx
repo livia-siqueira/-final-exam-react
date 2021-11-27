@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {fetchGamesData} from "./thunks";
 import toast from "react-hot-toast";
-import { Games } from "@utils/types";
+import { Games } from "src/shared/utils/types";
 
 
 const initialState: Games = {

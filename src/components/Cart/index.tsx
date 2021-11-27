@@ -1,7 +1,7 @@
 import { useDispatch} from "react-redux";
 import { useNavigate } from "react-router";
-import { FiArrowRight } from "react-icons/fi";
 import { AppDispatch} from "src/store";
+import { FiArrowRight } from "@sharedAssets/index";
 import {
   Bets,
   CartTotal,
@@ -10,8 +10,8 @@ import {
   InputPrice,
   SaveCart,
   Title,
+  Msg
 } from "./styles";
-import {Msg} from '../../stylesGlobal/global'
 import { Bet } from "src/shared/utils/types";
 import { saveCart } from "@storeCart/thunks";
 import { addToCart } from "@storeCart/index";
@@ -35,7 +35,7 @@ export function Cart(props: propsBet) {
         dispatch(addToCart({bet: props.bets}));
         dispatch(saveCart());
         dispatch(gameSelected(''));
-        navigate("/HomeUser");
+        navigate("/Home");
       }
       else{
         const missing = 30.00 - totalPrice;
@@ -59,8 +59,8 @@ export function Cart(props: propsBet) {
         <Title>Cart</Title>
        <Msg>Your shopping cart is empty</Msg>
         <FooterCart>
-          <CartTotal>
-            <strong>cart </strong>  total:
+        <CartTotal>
+             <span>cart</span> total:
             <InputPrice type="text" id="inputPrice" value="R$0,00" disabled />
           </CartTotal>
         </FooterCart>
@@ -87,7 +87,7 @@ export function Cart(props: propsBet) {
         </Bets>
         <FooterCart>
           <CartTotal>
-            <strong>cart </strong> total:
+             <span>cart</span> total:
             <InputPrice type="text" id="inputPrice" value={new Intl.NumberFormat("pt-br", {
               style: "currency",
               currency: "BRL",

@@ -1,12 +1,4 @@
-import {
-  Container,
-  ContentBet,
-  Data,
-  Main,
-  Numbers,
-  Price,
-  Section,
-} from "./styles";
+import * as SC from "./styles";
 
 interface AddToCartData {
   color: string;
@@ -64,29 +56,29 @@ export function ItemBet(props: AddToCartData) {
   }
 
   return (
-    <Container>
-      <Main color={props.color}>
-        <Numbers>{props.numbers.join(",")}</Numbers>
-        <Section color={props.color}>
-          <ContentBet>
-            <Data>
+    <SC.Container>
+      <SC.Main color={props.color}>
+        <SC.Numbers>{props.numbers.join(",")}</SC.Numbers>
+        <SC.Section color={props.color}>
+          <SC.ContentBet>
+            <SC.Data>
               {Day}/{MonthInt}/{Year}
               <span>-</span>
-            </Data>
-            <Price>
+            </SC.Data>
+            <SC.Price>
               ({" "}
               {new Intl.NumberFormat("pt-br", {
                 style: "currency",
                 currency: "BRL",
               }).format(props.price)}
               )
-            </Price>
-          </ContentBet>
+            </SC.Price>
+          </SC.ContentBet>
           <div>
             <span>{props.type}</span>
           </div>
-        </Section>
-      </Main>
-    </Container>
+        </SC.Section>
+      </SC.Main>
+    </SC.Container>
   );
 }

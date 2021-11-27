@@ -13,7 +13,11 @@
       "@storeCart/*": ["./src/store/cartGames/*"],
       "@storeGames/*": ["./src/store/games/*"],
       "@pages/*": ["./src/pages/*"],
-      "@utils/*": ["src/utils/*"],
+      "@sharedUtils/*": ["src/shared/utils/*"],
+      "@sharedAssets/*": ["src/shared/assets/*"],
+      "@shared/hooks/*": ["src/shared/hooks"],
+      "@shared/styles/*": ["src/shared/styles"],
+      "@shared/types/*": ["src/shared/types"],
       "@stylesGlobal/*": ["./src/stylesGlobal"],
     },
     "allowJs": true,
@@ -31,6 +35,7 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src", 
+    "styled.d.ts"
   ]
 }

@@ -1,9 +1,9 @@
 import { Input } from "@components/UI/Input/styles";
 import { changePassword } from "@storeUser/thunks";
-import { validatePassword } from "@utils/index";
+import { validatePassword } from "src/shared/utils/index";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight } from "@sharedAssets/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "src/store";

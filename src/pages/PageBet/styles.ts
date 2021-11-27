@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 75%;
-    margin: 20px auto;
+    width: 80%;
+    margin: 50px auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 3fr 1fr;
+    gap: 4rem;
     color: #707070;
     overflow: hidden;
     padding-bottom: 20px;
@@ -19,16 +19,12 @@ export const Container = styled.div`
         justify-content: center;
         gap: 0rem;
     }
-
-
 `
 export const Text = styled.p`
     font-style: italic;
     font-size: 0.8rem;
     font-weight: bold;
     color: #868686;
-
-
 `
 export const Title = styled.h2`
     font-size: 2rem;

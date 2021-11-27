@@ -330,7 +330,11 @@ module.exports = function (webpackEnv) {
         '@storeCart': path.resolve(__dirname, '../src/store/cartGames/'),
         '@storeGames': path.resolve(__dirname, '../src/store/games/'),
         '@pages': path.resolve(__dirname, '../src/pages/'),
-        '@utils': path.resolve(__dirname, '../src/utils/'),
+        '@sharedUtils': path.resolve(__dirname, '../src/shared/utils/'),
+        '@sharedAssets': path.resolve(__dirname, '../src/shared/assets'),
+        '@sharedTypes': path.resolve(__dirname, '../src/shared/types'),
+        '@sharedHooks': path.resolve(__dirname, '../src/shared/hooks'),
+        '@sharedStyles': path.resolve(__dirname, '../src/shared/styles'),
         '@stylesGlobal': path.resolve(__dirname, '../src/stylesGlobal'),
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/

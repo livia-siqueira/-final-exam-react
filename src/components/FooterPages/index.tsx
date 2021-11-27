@@ -1,5 +1,9 @@
-import {FooterMain} from './styles';
+import { Container, Footer } from "./styles";
 
-
-
-export const Footer = () => <FooterMain>Copyright 2020 Luby Software</FooterMain>
+export function FooterPage() {
+  return (
+    <Container>
+      <Footer>Copyright 2020 Luby Software</Footer>
+    </Container>
+  );
+}

@@ -12,11 +12,3 @@ gap: 200px;
   }
 
 `
-export const Footer = styled.footer` 
-    position: fixed;
-    top: 90%;
-
-    @media(max-width: 720px){
-        position: relative;
-    }
-`

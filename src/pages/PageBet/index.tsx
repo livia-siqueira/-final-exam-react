@@ -7,7 +7,7 @@ import { fetchGamesData } from "@storeGames/thunks";
 import { gameSelected } from "@storeGames/index";
 import { addBetInUser } from "@storeUser/index";
 import { orderNumber } from "src/shared/utils/index";
-import {Cart, GameControls, GameArea, Header, ButtonsGame} from '@components/index'
+import {Cart, GameControls, GameArea, Header, ButtonsGame, FooterPage} from '@components/index'
 
 export function PageBet() {
   const dispatch: AppDispatch = useDispatch();
@@ -105,6 +105,10 @@ export function PageBet() {
       },
       user: userLogged ? userLogged.email : "erro",
     };
+    const hasBet = userLogged?.bets.some((bet) => {
+      return newBet.bet.numbers === bet.bet.numbers && newBet.bet.type === bet.bet.type;
+    })
+    if(hasBet) return toast.error("You already made this bet");
     dispatch(addBetInUser(newBet));
     handleClearGame();
   }, [dispatch, gameActual, numberBet, userLogged]);
@@ -138,6 +142,7 @@ export function PageBet() {
         </Main>
         <Cart bets={userLogged ? userLogged.bets : []} />
       </Container>
+      <FooterPage/>
     </>
   );
 }

@@ -1,24 +1,21 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-  width: 320px;
-  height: 290px;
+  width: 350px;
+  max-height: 460px;
   display: grid;
   grid-template-rows: 1fr 1fr;
   border: 0;
   background-color: white;
-  padding: 14px;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
+  padding-top: 14px;
   box-shadow: 0px 3px 25px #00000014;
   border-radius: 14px 14px 14px 14px;
-
-
 `;
 export const Button = styled.button`
   border: 0;
   background-color: transparent;
-  font-size: 3rem;
+  font-size: 2rem;
   color: #b5c401;
   font-weight: bold;
   font-style: italic;
@@ -26,7 +23,6 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-
   span {
     margin-right: 12px;
   }

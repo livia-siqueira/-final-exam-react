@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { betInCart, propsActionAddCart } from "@utils/types";
+import { betInCart, propsActionAddCart } from "src/shared/utils/types";
 
 const initialState : betInCart = {
   cart: [],

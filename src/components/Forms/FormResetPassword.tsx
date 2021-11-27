@@ -1,4 +1,4 @@
-import { FiArrowRight, FiArrowLeft } from "react-icons/fi/";
+import { FiArrowRight, FiArrowLeft } from "@sharedAssets/index";
 import { Button, Container, TitleForm } from "./styles";
 import { Input } from "../UI/Input/styles";
 import { useNavigate } from "react-router";

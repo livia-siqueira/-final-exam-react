@@ -1,4 +1,4 @@
-import {AiOutlineCloseCircle} from 'react-icons/ai'
+import {AiOutlineCloseCircle} from '@sharedAssets/index'
 import { useNavigate } from 'react-router'
 import { Container, Text } from './styles'
 

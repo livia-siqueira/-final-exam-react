@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { validatePassword, validationEmail } from "@utils/index";
+import { validatePassword, validationEmail } from "src/shared/utils/index";
 import { toast } from "react-hot-toast";
-import {Auth, Usuario, LoginData, AddToCartData, Bet, propsRemoveBet, AddUser} from '@utils/types'
+import {Auth, Usuario, LoginData, AddToCartData, Bet, propsRemoveBet, AddUser} from 'src/shared/utils/types'
 
 const initialState: Auth = {
   users: [],

@@ -1,5 +1,5 @@
 import { useDispatch} from "react-redux";
-import { FiTrash2 } from "react-icons/fi";
+import { FiTrash2 } from "@sharedAssets/index";
 import { AppDispatch} from "src/store";
 import { AreaAction, Button, Container, Main, Numbers, Price, Section } from "./styles";
 import { removeBet } from "@storeUser/index";

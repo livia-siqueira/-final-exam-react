@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 import { AppDispatch, RootState } from "../../index";
 import { updatePassword } from ".";
-import { Usuario } from "@utils/types";
+import { Usuario } from "src/shared/utils/types";
 
 
 interface ChangePasswordUser {

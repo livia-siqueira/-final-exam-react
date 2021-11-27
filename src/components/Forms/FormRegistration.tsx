@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router";
 import {toast} from 'react-hot-toast';
 import { useDispatch} from "react-redux";
-import { FiArrowRight, FiArrowLeft } from "react-icons/fi/";
+import { FiArrowRight, FiArrowLeft } from "@sharedAssets/index";
 import {
   Button,
   ButtonSignUp,

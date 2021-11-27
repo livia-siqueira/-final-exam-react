@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { FiArrowRight } from "react-icons/fi/";
+import { FiArrowRight } from "@sharedAssets/index";
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -28,7 +28,7 @@ export function FormLogin() {
     if (inputEmail && inputPassword) {
       dispatch(loginUser({ email: inputEmail, password: inputPassword }));
       const exist = user.some((user) => user.email === inputEmail);
-      navigate(`${exist ? "/HomeUser" : ""}`);
+      navigate(`${exist ? "/Home" : ""}`);
     } else {
       toast.error("Fill in the fields");
     }
