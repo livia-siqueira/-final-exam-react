@@ -8,7 +8,7 @@ export const Container = styled.div`
   opacity: 1;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  width: 19rem;
+  width: 17.5rem;
   max-height: 27rem;
 
   @media (max-width: 720px) {
@@ -51,7 +51,7 @@ export const Bets = styled.ul`
   display: block;
   padding-right: 2rem;
   padding-left: 0;
-  width: 18.5rem;
+  width: 17rem;
   margin-top: 2rem;
 
   ::-webkit-scrollbar {

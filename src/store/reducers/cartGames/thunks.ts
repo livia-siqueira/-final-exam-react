@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { AppDispatch, RootState } from "src/store"
-import { addBetsInCart } from "../users/controlUsers";
+import { AppDispatch, RootState } from "../../index"
+import { addBetsInCart } from "../index";
 
 export const saveCart = createAsyncThunk<  void,
 undefined,
@@ -11,6 +11,7 @@ undefined,
     "saveBet/saveBetInCartUser", (_, thunkApi) => {
       const userActual = thunkApi.getState().users.userAuthenticated;
       if(userActual) {
+        
         thunkApi.dispatch(addBetsInCart(userActual))
       }
     }

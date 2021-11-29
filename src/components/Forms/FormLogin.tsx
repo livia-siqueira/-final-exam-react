@@ -11,7 +11,7 @@ import {
   TitleForm,
 } from "./styles";
 import { Input } from "@components/UI/Input/styles";
-import { loginUser } from "@storeUser/index";
+import { loginUser } from "@storeReducers/index";
 import toast from "react-hot-toast";
 import { RootState } from "src/store";
 

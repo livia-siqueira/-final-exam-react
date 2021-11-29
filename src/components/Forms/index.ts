@@ -1,3 +1,3 @@
 export {FormLogin} from './FormLogin';
-export {FormRegistration} from './FormRegistration';
+export {Form} from './FormRegistrationAtualization';
 export {FormResetPassword} from './FormResetPassword';

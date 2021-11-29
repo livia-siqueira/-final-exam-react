@@ -1,29 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-
 import { AppDispatch, RootState } from "../../index";
-import { updatePassword } from ".";
-import { Usuario } from "src/shared/utils/types";
-
+import { updateAccount } from ".";
+import { Usuario } from "@sharedUtils/index";
 
 interface ChangePasswordUser {
-    user: Usuario,
+    user: Omit<Usuario, 'bets' | 'id'>,
     newPassword: string
 }
 
-export const changePassword = createAsyncThunk<
+export const changeUser = createAsyncThunk<
   void,
   ChangePasswordUser,
   {
     dispatch: AppDispatch;
     state: RootState;
   }
->("user/updatePassword", (updatedUser, thunkApi) => {
+>("user/updateUser", (updatedUser, thunkApi) => {
 
     const user = {
         ...updatedUser.user,
-        password: updatedUser.newPassword 
+        email: updatedUser.user.email,
+        name: updatedUser.user.name,
+        password: updatedUser.newPassword
     }
-  thunkApi.dispatch(updatePassword(user));
+  thunkApi.dispatch(updateAccount(user));
   toast.success("Change successfully")
 });

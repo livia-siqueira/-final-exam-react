@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {fetchGamesData} from "./thunks";
 import toast from "react-hot-toast";
-import { Games } from "src/shared/utils/types";
+import { Games } from "@sharedUtils/types";
 
 
 const initialState: Games = {
@@ -32,6 +32,6 @@ const games = createSlice({
   }
 });
 
-export const gamesReducer = games.reducer
+export const reducerGames = games.reducer
 export const {gameSelected} = games.actions
 

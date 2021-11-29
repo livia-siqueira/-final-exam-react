@@ -1,9 +1,10 @@
 import { useDispatch} from "react-redux";
 import { FiTrash2 } from "@sharedAssets/index";
+import { formatNumber } from "@sharedUtils/index";
 import { AppDispatch} from "src/store";
 import { AreaAction, Button, Container, Main, Numbers, Price, Section } from "./styles";
-import { removeBet } from "@storeUser/index";
-import {Bet} from 'src/shared/utils/types';
+import { removeBet } from "@storeReducers/index";
+import {Bet} from '@sharedUtils/types';
 
 interface AddToCartData {
   bet: Bet;
@@ -31,10 +32,7 @@ export function ItemCart(props: AddToCartData) {
         <Section color={props.bet.bet.color}>
           <p>{props.bet.bet.type}</p>
           <Price>
-            {new Intl.NumberFormat("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            }).format(props.bet.bet.price)}
+          {formatNumber(props.bet.bet.price)}
           </Price>
         </Section>
       </Main>

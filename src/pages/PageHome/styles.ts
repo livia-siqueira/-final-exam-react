@@ -20,6 +20,14 @@ export const Title = styled.h2`
   font-size: 1.4rem;
 `;
 
+export const Message = styled.p`
+  text-align: center;
+  margin-top: 8rem;
+  width: 100%;
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.colors.lightGreen};
+`;
+
 export const Bets = styled.ul`
   margin-top: 20px;
   max-height: 300px;
@@ -75,6 +83,11 @@ export const ButtonsFilter = styled.div`
     padding: 0;
     margin-bottom: 0;
     margin-top: 0;
+  }
+
+  h6{
+    font-size: 1rem;
+    margin-left: 1rem;
   }
 `;
 

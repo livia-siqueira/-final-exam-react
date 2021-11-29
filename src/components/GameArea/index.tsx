@@ -1,5 +1,5 @@
 import { ButtonsBet } from "@components/index";
-import { Game } from "src/shared/utils/types";
+import { Game } from "@sharedUtils/types";
 import { Buttons, Container, Description } from "./styles";
 
 

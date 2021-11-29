@@ -1,3 +1,4 @@
+import { formatNumber } from "@sharedUtils/index";
 import * as SC from "./styles";
 
 interface AddToCartData {
@@ -66,12 +67,7 @@ export function ItemBet(props: AddToCartData) {
               <span>-</span>
             </SC.Data>
             <SC.Price>
-              ({" "}
-              {new Intl.NumberFormat("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              }).format(props.price)}
-              )
+             {formatNumber(props.price)}
             </SC.Price>
           </SC.ContentBet>
           <div>

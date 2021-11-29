@@ -1,5 +1,5 @@
 import { Input } from "@components/UI/Input/styles";
-import { changePassword } from "@storeUser/thunks";
+import { changeUser } from "@storeReducers/index";
 import { validatePassword } from "src/shared/utils/index";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
@@ -41,7 +41,7 @@ export function FormChangePassword() {
       if(password && confirmPassword){
         if(!validatePassword(password)) return toast.error('Password must have a capital character and at least 9 characters');
         if(password.trim() !== confirmPassword.trim()) return toast.error('Passwords do not match')
-        dispatch(changePassword({user: userExact, newPassword: password}))
+        dispatch(changeUser({user: userExact, newPassword: password}))
         navigate("/");
       }
     

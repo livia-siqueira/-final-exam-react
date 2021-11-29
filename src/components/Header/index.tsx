@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiArrowRight } from "@sharedAssets/index";
 import * as SC from "./styles";
 import { AppDispatch, RootState } from "src/store";
-import { logoutUser } from "@storeUser/index";
-import { gameSelected } from "@storeGames/index";
+import { logoutUser, gameSelected } from "@storeReducers/index";
 
 interface propsHeader {
   type: string;
@@ -30,6 +29,10 @@ export function Header({ type }: propsHeader) {
     navigate("/Registration");
   };
 
+  const handleAccount = () => {
+    navigate("/Atualization");
+  }
+
   return (
     <>
       <SC.Container>
@@ -49,7 +52,7 @@ export function Header({ type }: propsHeader) {
           </div>
           {type !== "Nulo" ? (
             <div className="header-rigth">
-              <SC.Button>{Account}</SC.Button>
+              <SC.Button onClick={handleAccount}>{Account}</SC.Button>
               <div className="logout">
                 <SC.Button onClick={handleLogout}>
                   Log out <FiArrowRight />

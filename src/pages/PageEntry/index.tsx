@@ -1,6 +1,6 @@
 import {
   FormLogin,
-  FormRegistration,
+  Form,
   FormResetPassword,
   MainText,
   FooterPage,
@@ -16,7 +16,7 @@ export function PageEntry() {
         <div>
           <Routes>
             <Route path="/" element={<FormLogin />} />
-            <Route path="/Registration" element={<FormRegistration />} />
+            <Route path="/Registration" element={<Form title="Registration" />} />
             <Route path="/ResetPassword" element={<FormResetPassword />} />
           </Routes>
         </div>

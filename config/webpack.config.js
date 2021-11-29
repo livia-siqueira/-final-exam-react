@@ -326,9 +326,8 @@ module.exports = function (webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
         '@components': path.resolve(__dirname, '../src/components/'),
-        '@storeUser': path.resolve(__dirname, '../src/store/users/controlUsers/'),
-        '@storeCart': path.resolve(__dirname, '../src/store/cartGames/'),
-        '@storeGames': path.resolve(__dirname, '../src/store/games/'),
+        '@storeReducers': path.resolve(__dirname, '../src/store/reducers'),
+        '@store': path.resolve(__dirname, '../src/store/'),
         '@pages': path.resolve(__dirname, '../src/pages/'),
         '@sharedUtils': path.resolve(__dirname, '../src/shared/utils/'),
         '@sharedAssets': path.resolve(__dirname, '../src/shared/assets'),

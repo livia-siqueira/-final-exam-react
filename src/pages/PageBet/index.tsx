@@ -3,13 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { ChoiceGame, Container, Main, Title, Text } from "./styles";
 import { RootState, AppDispatch } from "src/store";
-import { fetchGamesData } from "@storeGames/thunks";
-import { gameSelected } from "@storeGames/index";
-import { addBetInUser } from "@storeUser/index";
-import { orderNumber } from "src/shared/utils/index";
-import {Cart, GameControls, GameArea, Header, ButtonsGame, FooterPage} from '@components/index'
+import { fetchGamesData, gameSelected, addBetInUser  } from "@storeReducers/index";
+import { orderNumber } from "@sharedUtils/index";
+import {
+  Cart,
+  GameControls,
+  GameArea,
+  Header,
+  ButtonsGame,
+  FooterPage,
+  PageError,
+} from "@components/index";
 
-export function PageBet() {
+interface propsPageBet{
+  authenticated: boolean
+}
+
+
+export function PageBet(props: propsPageBet) {
   const dispatch: AppDispatch = useDispatch();
   const [numberBet, setNumbersBet] = useState<number[]>([]);
 
@@ -21,12 +32,12 @@ export function PageBet() {
     (state: RootState) => state.users.userAuthenticated
   );
 
-  const games = useSelector((state: RootState) => state.games);
-  const gameActive = games.isGameAtivate;
+  const games = useSelector((state: RootState) => state.games.typesGame);
+  const gameActive = useSelector((state: RootState) => state.games.isGameAtivate);
 
-  const gameActual = games.typesGame.find((game) => {
+  const gameActual = games.find((game) => {
     if (game.type === gameActive) return game;
-    return '';
+    return "";
   });
 
   const ArrayMaxNumber: number[] = Array.from({
@@ -54,7 +65,7 @@ export function PageBet() {
       if (maxNumbersSorted !== 0) {
         while (getNumbers.length < maxNumbersSorted) {
           const numberGame = Math.floor(Math.random() * qtdNumberSorted);
-          if (!getNumbers.includes(numberGame) && numberGame!==0) {
+          if (!getNumbers.includes(numberGame) && numberGame !== 0) {
             getNumbers.push(numberGame);
           }
         }
@@ -79,7 +90,6 @@ export function PageBet() {
             toast.error("Já foram selecionados números suficientes");
             return numbers;
           }
-         
         }
 
         return [...numbers, number];
@@ -105,13 +115,12 @@ export function PageBet() {
       },
       user: userLogged ? userLogged.email : "erro",
     };
-    const hasBet = userLogged?.bets.some((bet) => {
-      return newBet.bet.numbers === bet.bet.numbers && newBet.bet.type === bet.bet.type;
-    })
-    if(hasBet) return toast.error("You already made this bet");
+
     dispatch(addBetInUser(newBet));
     handleClearGame();
   }, [dispatch, gameActual, numberBet, userLogged]);
+
+  if(!props.authenticated) return <PageError/>
 
   return (
     <>
@@ -124,7 +133,18 @@ export function PageBet() {
           </Title>
           <Text>Choose a game</Text>
           <ChoiceGame>
-          <ButtonsGame select={changeGameActual} type={gameActive} />
+            {games.map((item) => {
+              const isType = gameActual?.type === item.type ? true : false;
+              return (
+                <ButtonsGame
+                  key={item.id}
+                  type={item.type}
+                  color={item.color}
+                  isActive={isType}
+                  select={changeGameActual}
+                  />
+              );
+            })}
           </ChoiceGame>
           <GameArea
             arrayNumbersBet={numberGame}
@@ -142,7 +162,7 @@ export function PageBet() {
         </Main>
         <Cart bets={userLogged ? userLogged.bets : []} />
       </Container>
-      <FooterPage/>
+      <FooterPage />
     </>
   );
 }

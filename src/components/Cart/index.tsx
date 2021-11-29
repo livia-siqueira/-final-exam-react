@@ -12,12 +12,11 @@ import {
   Title,
   Msg
 } from "./styles";
-import { Bet } from "src/shared/utils/types";
-import { saveCart } from "@storeCart/thunks";
-import { addToCart } from "@storeCart/index";
+import { Bet } from "@sharedUtils/types";
 import { ItemCart } from "@components/index";
 import toast from "react-hot-toast";
-import { gameSelected } from "@storeGames/index";
+import { gameSelected, saveCart, addToCart } from "@storeReducers/index";
+import { formatNumber } from "@sharedUtils/index";
 
 
 interface propsBet {
@@ -39,10 +38,7 @@ export function Cart(props: propsBet) {
       }
       else{
         const missing = 30.00 - totalPrice;
-        toast.error(`Minimum amount is R$30,00. To save, add more ${new Intl.NumberFormat("pt-br", {
-          style: "currency",
-          currency: "BRL",
-        }).format(missing)} to bets.`)
+        toast.error(`Minimum amount is R$30,00. To save, add more ${formatNumber(missing)} to bets.`)
       }
     
     }
@@ -88,10 +84,7 @@ export function Cart(props: propsBet) {
         <FooterCart>
           <CartTotal>
              <span>cart</span> total:
-            <InputPrice type="text" id="inputPrice" value={new Intl.NumberFormat("pt-br", {
-              style: "currency",
-              currency: "BRL",
-            }).format(totalPrice)} disabled />
+            <InputPrice type="text" id="inputPrice" value={formatNumber(totalPrice)} disabled />
           </CartTotal>
         </FooterCart>
         <SaveCart onClick={handleSaveCartInBet}>

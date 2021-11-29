@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { betInCart, propsActionAddCart } from "src/shared/utils/types";
+import { betInCart, propsActionAddCart } from "@sharedUtils/types";
 
 const initialState : betInCart = {
   cart: [],
@@ -21,6 +21,6 @@ const controlCart = createSlice({
 });
 
 
-export default controlCart.reducer;
+export const reducerCart = controlCart.reducer;
 export const {addToCart} = controlCart.actions
 

@@ -11,7 +11,7 @@ export const themeTLG = {
     btNumber: "#adc0c4",
     lightGreen: "#B5C401",
     grayCart: "#E2E2E2", 
-    backgroundCart: "#f4f4f4"
+    backgroundCart: "#f4f4f4",
   },
   borderColors: {
     lightGray: "#ebebeb",

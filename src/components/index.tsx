@@ -9,4 +9,4 @@ export {ItemBet} from './ItemBet';
 export {ItemCart} from './ItemCart';
 export {MainText} from './MainText';
 export {PageError} from './PageError';
-export {FormLogin, FormRegistration, FormResetPassword} from "./Forms";
+export {FormLogin, Form, FormResetPassword} from "./Forms";
