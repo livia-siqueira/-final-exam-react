@@ -68,12 +68,13 @@ const controlUser = createSlice({
         if (existentUser) {
           state.isAutenthicated = true;
           state.userAuthenticated = existentUser;
-          toast.success(`Olá, ${existentUser.name}! Bem vindo ✨`);
+          toast.success(`Olá, ${existentUser.name}! Bem vindo(a) ✨`);
           return state;
         } else {
           const hasEmail = state.users.some((user) => {
             return user.email === email;
           });
+          console.log(hasEmail)
           if (hasEmail) {
             toast.error("Incorrect password 😥");
           } else {

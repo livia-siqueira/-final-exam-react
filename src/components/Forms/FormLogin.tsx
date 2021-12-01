@@ -28,7 +28,7 @@ export function FormLogin() {
     if (inputEmail && inputPassword) {
       dispatch(loginUser({ email: inputEmail, password: inputPassword }));
       const exist = user.some((user) => user.email === inputEmail);
-      navigate(`${exist ? "/Home" : ""}`);
+      navigate('/Home')
     } else {
       toast.error("Fill in the fields");
     }
@@ -50,13 +50,16 @@ export function FormLogin() {
         <Container>
           <Input
             type="Email"
+            data-cy="inputEmail"
             placeholder="Email"
             value={inputEmail}
             onChange={(event) => setInputEmail(event.target.value)}
           />
           <Input
             type="password"
+            data-cy="inputPassword"
             placeholder="Password"
+            value={inputPassword}
             onChange={(event) => setInputPassword(event.target.value)}
           />
             <SpanForgetPassword>

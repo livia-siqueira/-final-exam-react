@@ -65,16 +65,20 @@ export function Form({ title }: propsForm) {
           <TitleForm>{title}</TitleForm>
           <Container onSubmit={handlerClickSave}>
             <Input
+              data-cy="inputName"
+              id="name"
               type="text"
               placeholder="Nome"
               onChange={(event) => setInputName(event.target.value)}
             />
             <Input
+             data-cy="inputEmail"
               type="Email"
               placeholder="Email"
               onChange={(event) => setInputEmail(event.target.value)}
             />
             <Input
+             data-cy="inputPassword"
               type="password"
               placeholder="Password"
               onChange={(event) => setInputPassword(event.target.value)}
@@ -86,7 +90,6 @@ export function Form({ title }: propsForm) {
           <ButtonSignUp onClick={() => navigate("/")}>
             <FiArrowLeft color="#535351" /> Back
           </ButtonSignUp>
-          )
         </Content>
       </>
     );
